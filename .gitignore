@@ -18,3 +18,7 @@ server/uploads/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Demo estática (GitHub Pages): se genera, no se versiona
+client/.pages/
+dist-pages/

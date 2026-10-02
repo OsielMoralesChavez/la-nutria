@@ -6,6 +6,8 @@
  * - Ante un 401 se intenta renovar UNA vez (en vuelo compartido) y se reintenta.
  * - Los errores se normalizan a ApiError { status, code, message, details, requestId }.
  */
+import { STATIC_DEMO, staticRequest } from './staticDemo.js';
+
 const BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 let accessToken = null;
@@ -62,6 +64,11 @@ async function parse(res) {
 }
 
 async function send(method, path, { body, query, signal } = {}) {
+  if (STATIC_DEMO) {
+    // Demo estática (GitHub Pages): responde con la instantánea, sin servidor.
+    const r = await staticRequest(method, path, query);
+    return new Response(r.body === null ? null : JSON.stringify(r.body), { status: r.status, headers: { 'content-type': 'application/json' } });
+  }
   const headers = {};
   const isForm = typeof FormData !== 'undefined' && body instanceof FormData;
   if (body !== undefined && !isForm) headers['Content-Type'] = 'application/json';

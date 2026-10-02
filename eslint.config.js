@@ -4,10 +4,10 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
-  { ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', 'server/uploads/**', 'server/tests/.uploads/**'] },
+  { ignores: ['**/dist/**', 'dist-pages/**', 'client/.pages/**', '**/node_modules/**', '**/coverage/**', 'server/uploads/**', 'server/tests/.uploads/**'] },
   js.configs.recommended,
   {
-    files: ['server/**/*.js', 'shared/**/*.js', '*.js', 'client/vite.config.js'],
+    files: ['server/**/*.js', 'shared/**/*.js', '*.js', 'scripts/**/*.mjs', 'client/vite.config.js'],
     languageOptions: { ecmaVersion: 'latest', sourceType: 'module', globals: { ...globals.node } },
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],

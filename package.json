@@ -21,7 +21,9 @@
     "seed": "npm run seed -w server",
     "seed:demo": "npm run seed:demo -w server",
     "test": "npm test -w shared && npm test -w server && npm test -w client",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:deploy": "node scripts/deploy-pages.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -3,6 +3,8 @@ import { Outlet, useMatch } from 'react-router';
 import { Drawer, LoadingState } from '../components/ui/index.js';
 import { useAuth } from '../features/auth/AuthProvider.jsx';
 import { cn } from '../lib/cn.js';
+import { STATIC_DEMO } from '../lib/staticDemo.js';
+import { DemoBanner } from './DemoBanner.jsx';
 import { BottomNav } from './BottomNav.jsx';
 import { CommandPalette } from './CommandPalette.jsx';
 import { Sidebar } from './Sidebar.jsx';
@@ -73,6 +75,7 @@ export function AppLayout() {
         onNewConsultation={() => setPalette({ open: true, mode: 'consultation' })}
         onLogout={handleLogout}
       />
+      {STATIC_DEMO && <DemoBanner />}
 
       <div className="flex">
         <aside

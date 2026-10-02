@@ -83,4 +83,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+  ],
+  // En GitHub Pages la app vive bajo /la-nutria/; en local, en la raíz.
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/' },
+);
