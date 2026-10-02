@@ -144,12 +144,12 @@ function ConsultationEditor({ context, patient }) {
   return (
     <div className="-mt-1">
       {/* Cabecera mínima y fija */}
-      <div className="glass sticky top-14 z-20 -mx-4 mb-4 border-b px-4 py-2.5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div className="glass sticky top-16 z-20 lg:top-[84px] -mx-4 mb-4 border-b px-4 py-2.5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <IconButton icon={ArrowLeft} label="Volver a la ficha" size="sm" onClick={leave} />
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold text-ink">
-              <Link to={`/pacientes/${patient.id}`} className="hover:text-brand-700">
+              <Link to={`/pacientes/${patient.id}`} className="hover:text-accent">
                 {patient.fullName}
               </Link>
               <span className="font-normal text-ink-3">
@@ -181,10 +181,10 @@ function ConsultationEditor({ context, patient }) {
               onClick={() => goTo(s.key)}
               className={cn(
                 'inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-                step === s.key ? 'bg-brand-700 text-white shadow-sm' : 'text-ink-3 hover:bg-slate-900/5 hover:text-ink',
+                step === s.key ? 'bg-brand-700 text-white shadow-sm' : 'text-ink-3 hover:bg-white/10 hover:text-ink',
               )}
             >
-              <span className={cn('grid size-5 place-items-center rounded-full text-[11px]', step === s.key ? 'bg-white/20' : filled[s.key] ? 'bg-brand-100 text-brand-800' : 'bg-slate-200 text-ink-3')}>
+              <span className={cn('grid size-5 place-items-center rounded-full text-[11px]', step === s.key ? 'bg-white/20' : filled[s.key] ? 'bg-brand-100 text-accent' : 'bg-white/15 text-ink-3')}>
                 {filled[s.key] && step !== s.key ? <Check aria-hidden className="size-3" /> : i + 1}
               </span>
               {s.label}
@@ -216,7 +216,7 @@ function ConsultationEditor({ context, patient }) {
         </div>
 
         <aside aria-label="Contexto del paciente" className="order-first xl:order-none">
-          <div className="card xl:sticky xl:top-40">
+          <div className="card xl:sticky xl:top-[210px]">
             <button
               type="button"
               onClick={() => setShowContext((v) => !v)}
@@ -247,7 +247,7 @@ function PatientContext({ context }) {
       {items.length === 0 && <p className="text-ink-3">Sin datos de expediente todavía.</p>}
       {items.map(([label, value]) => (
         <div key={label}>
-          <p className={cn('text-xs font-medium', label === 'Alergias' ? 'text-red-700' : 'text-ink-3')}>
+          <p className={cn('text-xs font-medium', label === 'Alergias' ? 'text-red-300' : 'text-ink-3')}>
             {label === 'Alergias' && <AlertCircle aria-hidden className="mr-1 inline size-3.5" />}
             {label}
           </p>
@@ -263,11 +263,11 @@ function PatientContext({ context }) {
 
 function SaveIndicator({ status }) {
   const map = {
-    saved: [CheckCircle2, 'text-emerald-700', 'Borrador guardado'],
+    saved: [CheckCircle2, 'text-emerald-300', 'Borrador guardado'],
     dirty: [Loader2, 'text-ink-3', 'Cambios por guardar…'],
     saving: [Loader2, 'text-ink-3', 'Guardando…'],
-    offline: [CloudOff, 'text-amber-700', 'Sin conexión: se guardará al reconectar'],
-    error: [AlertCircle, 'text-red-700', 'No se pudo guardar: revisa los datos'],
+    offline: [CloudOff, 'text-amber-300', 'Sin conexión: se guardará al reconectar'],
+    error: [AlertCircle, 'text-red-300', 'No se pudo guardar: revisa los datos'],
   };
   const [Icon, color, label] = map[status];
   return (

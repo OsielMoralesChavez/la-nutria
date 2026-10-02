@@ -39,7 +39,7 @@ export function AppointmentDrawer({ id, onClose }) {
       {a && (
         <div className="space-y-5">
           <div>
-            <Link to={`/pacientes/${a.patient?.id}`} className="text-lg font-semibold text-ink hover:text-brand-700">
+            <Link to={`/pacientes/${a.patient?.id}`} className="text-lg font-semibold text-ink hover:text-accent">
               {fullName(a.patient)}
             </Link>
             <p className="mt-0.5 text-sm text-ink-2">
@@ -55,7 +55,7 @@ export function AppointmentDrawer({ id, onClose }) {
 
           <DataList
             items={[
-              { label: 'Teléfono', value: a.patient?.contact?.phone && <a href={`tel:${a.patient.contact.phone}`} className="inline-flex items-center gap-1 text-brand-700"><Phone aria-hidden className="size-3.5" />{a.patient.contact.phone}</a> },
+              { label: 'Teléfono', value: a.patient?.contact?.phone && <a href={`tel:${a.patient.contact.phone}`} className="inline-flex items-center gap-1 text-accent"><Phone aria-hidden className="size-3.5" />{a.patient.contact.phone}</a> },
               { label: 'Notas', value: a.notes },
               { label: 'Cancelación', value: a.cancelReason },
             ]}
@@ -98,7 +98,7 @@ export function AppointmentDrawer({ id, onClose }) {
           )}
 
           {mode === 'reschedule' && (
-            <div className="space-y-3 rounded-xl border border-line bg-white p-3">
+            <div className="space-y-3 rounded-xl border border-line bg-surface-2 p-3">
               <p className="text-sm font-semibold text-ink">Reprogramar</p>
               <SlotPicker
                 date={date}
@@ -140,7 +140,7 @@ export function AppointmentDrawer({ id, onClose }) {
           )}
 
           {mode === 'cancel' && (
-            <div className="space-y-3 rounded-xl border border-red-200 bg-red-50/50 p-3">
+            <div className="space-y-3 rounded-xl border border-red-300/30 bg-red-400/10 p-3">
               <Field label="Motivo de cancelación">
                 {(p) => (
                   <Select {...p} value={reason} onChange={(e) => setReason(e.target.value)}>

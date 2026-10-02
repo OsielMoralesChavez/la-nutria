@@ -5,7 +5,7 @@ export function Logo({ compact, size = 'md', className }) {
   const box = size === 'lg' ? 'size-11 rounded-2xl' : 'size-8 rounded-xl';
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <span className={cn('grid shrink-0 place-items-center bg-brand-700 text-white shadow-sm', box)} aria-hidden>
+      <span className={cn('grid shrink-0 place-items-center bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-md', box)} aria-hidden>
         <svg viewBox="0 0 32 32" className={size === 'lg' ? 'size-8' : 'size-6'}>
           <path d="M9 20c0-5 3.1-9 7-9s7 4 7 9" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
           <circle cx="13" cy="16" r="1.4" fill="currentColor" />

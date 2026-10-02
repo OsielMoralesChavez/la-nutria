@@ -46,17 +46,17 @@ export function NextStepsPanel({ patient, next, className, compact }) {
       <section aria-label="Próxima cita">
         <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-ink-3">Próxima cita</h3>
         {appt ? (
-          <div className="rounded-xl border border-line bg-white p-3">
+          <div className="rounded-xl border border-line bg-surface-2 p-3">
             <p className="text-sm font-semibold text-ink">{fmtDateTime(appt.start)}</p>
             <div className="mt-1 flex items-center justify-between gap-2">
               <StatusBadge kind="appointment" status={appt.status} size="sm" />
-              <Link to={`/agenda?cita=${appt.id}`} className="text-xs font-medium text-brand-700 hover:underline">
+              <Link to={`/agenda?cita=${appt.id}`} className="text-xs font-medium text-accent hover:underline">
                 Ver / reprogramar
               </Link>
             </div>
           </div>
         ) : (
-          <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50/60 p-3 text-sm text-amber-900">
+          <div className="rounded-xl border border-dashed border-amber-300/30 bg-amber-400/10 p-3 text-sm text-amber-200">
             Sin cita agendada.
             {can('appointments:create') && !archived && (
               <Link to={`/agenda?nueva=1&paciente=${patient.id}`} className="ml-1 font-semibold underline">
@@ -78,20 +78,20 @@ export function NextStepsPanel({ patient, next, className, compact }) {
           {next.followUps.map((f) => {
             const overdue = new Date(f.dueDate) < new Date();
             return (
-              <li key={f.id} className="flex items-start gap-2 rounded-lg p-1.5 hover:bg-slate-900/[0.03]">
+              <li key={f.id} className="flex items-start gap-2 rounded-lg p-1.5 hover:bg-white/[0.06]">
                 {can('followups:update') && (
                   <button
                     type="button"
                     aria-label={`Marcar como realizado: ${f.reason}`}
                     onClick={() => updateFu.mutate({ id: f.id, body: { status: 'realizado' } }, { onSuccess: () => toast.success('Seguimiento realizado') })}
-                    className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-slate-300 bg-white text-transparent hover:border-brand-600 hover:text-brand-700"
+                    className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-white/20 bg-surface-2 text-transparent hover:border-brand-600 hover:text-accent"
                   >
                     <Check aria-hidden className="size-3.5" />
                   </button>
                 )}
                 <span className="min-w-0 flex-1 text-sm">
                   <span className="block text-ink">{f.reason}</span>
-                  <span className={cn('text-xs', overdue ? 'font-medium text-red-700' : 'text-ink-3')}>
+                  <span className={cn('text-xs', overdue ? 'font-medium text-red-300' : 'text-ink-3')}>
                     {overdue ? 'Vencido · ' : ''}
                     {fmtDate(f.dueDate)} ({fmtRelative(f.dueDate)})
                   </span>
@@ -110,7 +110,7 @@ export function NextStepsPanel({ patient, next, className, compact }) {
           <ul className="space-y-1.5">
             {next.goalsDueSoon.map((g) => (
               <li key={g.id} className="flex items-center gap-2 text-sm">
-                <AlarmClock aria-hidden className="size-4 shrink-0 text-amber-600" />
+                <AlarmClock aria-hidden className="size-4 shrink-0 text-amber-300" />
                 <span className="min-w-0 flex-1 truncate text-ink">{g.title}</span>
                 <span className="shrink-0 text-xs text-ink-3">{fmtDate(g.dueDate)}</span>
               </li>
@@ -125,9 +125,9 @@ export function NextStepsPanel({ patient, next, className, compact }) {
           <h3 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-ink-3">Alertas</h3>
           <ul className="space-y-2">
             {next.alerts.map((a) => (
-              <li key={a.id} className="rounded-lg border border-line bg-white p-2.5">
+              <li key={a.id} className="rounded-lg border border-line bg-surface-2 p-2.5">
                 <p className="flex items-start gap-2 text-sm text-ink">
-                  <AlertTriangle aria-hidden className={cn('mt-0.5 size-4 shrink-0', a.severity === 'alta' ? 'text-red-600' : 'text-amber-600')} />
+                  <AlertTriangle aria-hidden className={cn('mt-0.5 size-4 shrink-0', a.severity === 'alta' ? 'text-red-300' : 'text-amber-300')} />
                   {a.message}
                 </p>
                 {can('alerts:update') && (
@@ -174,7 +174,7 @@ function QuickFollowUp({ patientId }) {
 
   if (!open) {
     return (
-      <button type="button" onClick={() => setOpen(true)} className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-brand-700 hover:underline">
+      <button type="button" onClick={() => setOpen(true)} className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-accent hover:underline">
         <Plus aria-hidden className="size-3.5" /> Agregar seguimiento
       </button>
     );
@@ -195,7 +195,7 @@ function QuickFollowUp({ patientId }) {
     );
   };
   return (
-    <form onSubmit={submit} className="mt-2 space-y-2 rounded-xl bg-slate-50 p-2.5">
+    <form onSubmit={submit} className="mt-2 space-y-2 rounded-xl bg-white/5 p-2.5">
       <Input autoFocus value={reason} onChange={(e) => setReason(e.target.value)} placeholder="¿Qué hay que hacer?" aria-label="Motivo del seguimiento" className="h-9" />
       <div className="flex items-center gap-2">
         <Input type="date" value={due} min={toInputDate(new Date())} onChange={(e) => setDue(e.target.value)} aria-label="Fecha" className="h-9 flex-1" />
@@ -228,7 +228,7 @@ export function NextStepsBar({ patient, next, onOpen }) {
           {pending ? ` · ${pending} pendiente${pending > 1 ? 's' : ''}` : ''}
         </span>
       </span>
-      <CalendarClock aria-hidden className="size-5 text-brand-700" />
+      <CalendarClock aria-hidden className="size-5 text-accent" />
     </button>
   );
 }

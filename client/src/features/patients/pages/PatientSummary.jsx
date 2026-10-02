@@ -74,7 +74,7 @@ export function PatientSummary() {
         linkLabel="Evolución completa"
         emphasis
       >
-        {onlyOne && <p className="mb-3 rounded-lg bg-slate-50 px-3 py-2 text-xs text-ink-3">Hay una sola medición: las tendencias aparecerán desde la segunda.</p>}
+        {onlyOne && <p className="mb-3 rounded-lg bg-white/5 px-3 py-2 text-xs text-ink-3">Hay una sola medición: las tendencias aparecerán desde la segunda.</p>}
         <MetricComparisonTable metrics={progress.metrics} selected={selected} onSelect={setSelected} />
         {selected && (
           <div className="mt-5 border-t border-line/70 pt-4">
@@ -115,7 +115,7 @@ export function PatientSummary() {
               {begin.baseline
                 .filter((b) => ['peso', 'imc', 'grasa_pct', 'cintura', 'masa_muscular'].includes(b.key))
                 .map((b) => (
-                  <li key={b.key} className="rounded-lg bg-slate-50 px-2.5 py-1.5 text-xs">
+                  <li key={b.key} className="rounded-lg bg-white/5 px-2.5 py-1.5 text-xs">
                     <span className="text-ink-3">{b.label}</span>{' '}
                     <span className="font-semibold text-ink tabular">{fmtNum(b.value, metricMap[b.key]?.decimals, b.unit)}</span>
                   </li>

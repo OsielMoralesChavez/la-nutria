@@ -48,7 +48,7 @@ export function Timeline({ patientId, limit = 15, filterable = true, compact = f
                 onClick={() => toggle(t)}
                 className={cn(
                   'inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium transition-colors',
-                  on ? 'border-brand-600 bg-brand-50 text-brand-800' : 'border-line bg-white text-ink-3 hover:text-ink',
+                  on ? 'border-brand-600 bg-brand-50 text-accent' : 'border-line bg-surface-2 text-ink-3 hover:text-ink',
                 )}
               >
                 <Icon aria-hidden className="size-3.5" />
@@ -74,8 +74,8 @@ export function Timeline({ patientId, limit = 15, filterable = true, compact = f
               {!isLast && <span aria-hidden className="absolute left-[15px] top-8 bottom-0 w-px bg-line" />}
               <span
                 className={cn(
-                  'relative z-10 grid size-8 shrink-0 place-items-center rounded-full ring-4 ring-white',
-                  e.isStart ? 'bg-brand-700 text-white' : e.type === 'consulta' ? 'bg-brand-50 text-brand-700' : 'bg-slate-100 text-ink-3',
+                  'relative z-10 grid size-8 shrink-0 place-items-center rounded-full ring-4 ring-[#2b2766]',
+                  e.isStart ? 'bg-brand-700 text-white' : e.type === 'consulta' ? 'bg-brand-50 text-accent' : 'bg-white/10 text-ink-3',
                 )}
               >
                 <Icon aria-hidden className="size-4" />
@@ -85,7 +85,7 @@ export function Timeline({ patientId, limit = 15, filterable = true, compact = f
                   <time className="text-xs font-medium text-ink-3 tabular" dateTime={e.date}>
                     {fmtDateFull(e.date)}
                   </time>
-                  <span className={cn('text-sm font-semibold', e.isStart ? 'text-brand-800' : 'text-ink')}>
+                  <span className={cn('text-sm font-semibold', e.isStart ? 'text-accent' : 'text-ink')}>
                     {e.isStart ? 'INICIO · ' : ''}
                     {e.title}
                   </span>
@@ -127,7 +127,7 @@ export function Timeline({ patientId, limit = 15, filterable = true, compact = f
                         {e.addenda > 0 && <Badge size="sm">{e.addenda} adenda{e.addenda > 1 ? 's' : ''}</Badge>}
                       </div>
                     )}
-                    <Link to={`/pacientes/${patientId}/intervenciones/consultas/${e.consultationId}`} className="inline-block text-xs font-medium text-brand-700 hover:underline">
+                    <Link to={`/pacientes/${patientId}/intervenciones/consultas/${e.consultationId}`} className="inline-block text-xs font-medium text-accent hover:underline">
                       Ver consulta
                     </Link>
                   </div>

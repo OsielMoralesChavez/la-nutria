@@ -31,7 +31,7 @@ export function PatientLayout() {
   if (summary.isPending) return <PatientSkeleton />;
   if (summary.isError) {
     if (summary.error.status === 404) {
-      return <EmptyState icon={UserX} title="Paciente no encontrado" description="Puede que el enlace sea incorrecto o que el paciente haya sido eliminado." action={<Link to="/pacientes" className="font-medium text-brand-700 hover:underline">Volver a pacientes</Link>} />;
+      return <EmptyState icon={UserX} title="Paciente no encontrado" description="Puede que el enlace sea incorrecto o que el paciente haya sido eliminado." action={<Link to="/pacientes" className="font-medium text-accent hover:underline">Volver a pacientes</Link>} />;
     }
     return <ErrorState error={summary.error} onRetry={() => summary.refetch()} />;
   }
@@ -55,7 +55,7 @@ export function PatientLayout() {
           <Outlet context={{ summary: data, patient }} />
         </div>
         <aside aria-label="¿Qué sigue?" className="hidden lg:block">
-          <div className="glass sticky top-20 rounded-[var(--radius-card)] border p-4 shadow-[var(--shadow-card)]">
+          <div className="glass lg:sticky lg:top-[104px] rounded-[var(--radius-card)] border p-4 shadow-[var(--shadow-card)]">
             <NextStepsPanel patient={patient} next={data.next} />
           </div>
         </aside>

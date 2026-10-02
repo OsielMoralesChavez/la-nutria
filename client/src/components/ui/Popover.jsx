@@ -30,7 +30,7 @@ export function Popover({ trigger, children, align = 'end', className, width = '
         <div
           id={id}
           className={cn(
-            'glass-strong absolute top-full z-40 mt-2 rounded-xl border border-white/60 p-1.5 shadow-[var(--shadow-pop)] animate-slide-up max-sm:fixed max-sm:inset-x-3 max-sm:top-16 max-sm:w-auto',
+            'glass-strong absolute top-full z-40 mt-2 rounded-xl border border-white/15 p-1.5 shadow-[var(--shadow-pop)] animate-slide-up max-sm:fixed max-sm:inset-x-3 max-sm:top-16 max-sm:w-auto',
             align === 'end' ? 'right-0' : 'left-0',
             width,
             className,
@@ -47,13 +47,13 @@ export function Popover({ trigger, children, align = 'end', className, width = '
 export function MenuItem({ icon: Icon, to, onClick, children, danger, hint, close }) {
   const classes = cn(
     'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors',
-    danger ? 'text-red-700 hover:bg-red-50' : 'text-ink-2 hover:bg-slate-900/5 hover:text-ink',
+    danger ? 'text-red-300 hover:bg-red-400/15' : 'text-ink-2 hover:bg-white/10 hover:text-ink',
   );
   const content = (
     <>
       {Icon && <Icon aria-hidden className="size-4 shrink-0 opacity-80" />}
       <span className="flex-1">{children}</span>
-      {hint && <kbd className="rounded border border-line bg-white px-1.5 text-[10px] text-ink-3">{hint}</kbd>}
+      {hint && <kbd className="rounded border border-line bg-surface-2 px-1.5 text-[10px] text-ink-3">{hint}</kbd>}
     </>
   );
   return to ? (

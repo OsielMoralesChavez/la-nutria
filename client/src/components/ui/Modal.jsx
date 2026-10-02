@@ -75,7 +75,7 @@ export function Modal({ open, onClose, title, description, size = 'md', footer, 
         aria-describedby={description ? descId : undefined}
         tabIndex={-1}
         className={cn(
-          'glass-strong relative flex max-h-[92dvh] w-full flex-col rounded-t-2xl border border-white/60 shadow-[var(--shadow-pop)] outline-none animate-slide-up sm:rounded-2xl',
+          'glass-strong relative flex max-h-[92dvh] w-full flex-col rounded-t-2xl border border-white/15 shadow-[var(--shadow-pop)] outline-none animate-slide-up sm:rounded-2xl',
           SIZES[size],
           className,
         )}
@@ -117,7 +117,7 @@ export function Drawer({ open, onClose, title, children, footer, width = 'sm:w-[
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={cn('glass-strong relative flex h-full w-full flex-col border-l border-white/60 shadow-[var(--shadow-pop)] outline-none animate-slide-in-right', width)}
+        className={cn('glass-strong relative flex h-full w-full flex-col border-l border-white/15 shadow-[var(--shadow-pop)] outline-none animate-slide-in-right', width)}
       >
         <header className="flex items-center justify-between gap-3 border-b border-line/70 px-5 py-4">
           <h2 id={titleId} className="text-base font-semibold text-ink">

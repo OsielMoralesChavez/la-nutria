@@ -27,10 +27,10 @@ export function PatientCombobox({ value, onChange, inputProps }) {
 
   if (value) {
     return (
-      <div className="flex h-10 items-center gap-2 rounded-xl border border-line bg-white px-2">
+      <div className="flex h-10 items-center gap-2 rounded-xl border border-line bg-surface-2 px-2">
         <Avatar name={value.fullName} size="sm" />
         <span className="flex-1 truncate text-sm font-medium text-ink">{value.fullName}</span>
-        <button type="button" aria-label="Cambiar paciente" onClick={() => onChange(null)} className="grid size-7 place-items-center rounded-lg text-ink-3 hover:bg-slate-900/5">
+        <button type="button" aria-label="Cambiar paciente" onClick={() => onChange(null)} className="grid size-7 place-items-center rounded-lg text-ink-3 hover:bg-white/10">
           <X aria-hidden className="size-4" />
         </button>
       </div>
@@ -73,11 +73,11 @@ export function PatientCombobox({ value, onChange, inputProps }) {
           }
         }}
         placeholder="Busca por nombre o teléfono…"
-        className="h-10 w-full rounded-xl border border-line bg-white pl-9 pr-3 text-sm focus:border-brand-600 focus:outline-none focus:ring-3 focus:ring-brand-600/15"
+        className="h-10 w-full rounded-xl border border-line bg-surface-2 pl-9 pr-3 text-sm focus:border-brand-600 focus:outline-none focus:ring-3 focus:ring-brand-600/15"
         autoComplete="off"
       />
       {open && term.length >= 2 && (
-        <ul id={listId} role="listbox" className="glass-strong absolute z-10 mt-1 max-h-64 w-full overflow-y-auto rounded-xl border border-white/60 p-1 shadow-[var(--shadow-pop)]">
+        <ul id={listId} role="listbox" className="glass-strong absolute z-10 mt-1 max-h-64 w-full overflow-y-auto rounded-xl border border-white/15 p-1 shadow-[var(--shadow-pop)]">
           {results.isFetching && items.length === 0 && <li className="px-3 py-2 text-sm text-ink-3">Buscando…</li>}
           {results.isSuccess && items.length === 0 && <li className="px-3 py-2 text-sm text-ink-3">Sin coincidencias.</li>}
           {items.map((p, i) => (

@@ -125,20 +125,20 @@ function PendingFollowUps() {
                 type="button"
                 aria-label={`Marcar realizado: ${f.reason}`}
                 onClick={() => done.mutate(f.id)}
-                className="grid size-6 shrink-0 place-items-center rounded-md border border-slate-300 bg-white text-transparent hover:border-brand-600 hover:text-brand-700"
+                className="grid size-6 shrink-0 place-items-center rounded-md border border-white/20 bg-surface-2 text-transparent hover:border-brand-600 hover:text-accent"
               >
                 <Check aria-hidden className="size-4" />
               </button>
               <div className="min-w-0 flex-1">
                 <p className="text-sm text-ink">{f.reason}</p>
                 <p className="text-xs text-ink-3">
-                  <Link to={`/pacientes/${f.patient?.id}`} className="font-medium text-brand-700 hover:underline">
+                  <Link to={`/pacientes/${f.patient?.id}`} className="font-medium text-accent hover:underline">
                     {fullName(f.patient)}
                   </Link>
                   {f.assignedTo?.name && ` · ${f.assignedTo.name}`}
                 </p>
               </div>
-              <span className={cn('text-xs', overdue ? 'font-semibold text-red-700' : 'text-ink-3')}>
+              <span className={cn('text-xs', overdue ? 'font-semibold text-red-300' : 'text-ink-3')}>
                 {overdue && <AlertTriangle aria-hidden className="mr-1 inline size-3.5" />}
                 {fmtDate(f.dueDate)} · {fmtRelative(f.dueDate)}
               </span>
@@ -190,7 +190,7 @@ function NoRecent() {
         {query.data?.map((p) => (
           <li key={p.id} className="flex items-center gap-3 py-2.5">
             <Avatar name={p.fullName} size="sm" />
-            <Link to={`/pacientes/${p.id}`} className="min-w-0 flex-1 truncate text-sm font-medium text-ink hover:text-brand-700">
+            <Link to={`/pacientes/${p.id}`} className="min-w-0 flex-1 truncate text-sm font-medium text-ink hover:text-accent">
               {p.fullName}
             </Link>
             <Badge size="sm" tone="amber">

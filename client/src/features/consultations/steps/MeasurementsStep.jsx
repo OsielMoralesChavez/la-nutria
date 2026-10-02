@@ -74,7 +74,7 @@ export function MeasurementsStep({ state, update, context }) {
               const out = input && current !== null && ((def.min !== undefined && def.min !== null && current < def.min) || (def.max !== undefined && def.max !== null && current > def.max));
               const invalid = input && v?.raw && v.value === null;
               return (
-                <tr key={def.key} className={cn(!input && 'bg-slate-50/60')}>
+                <tr key={def.key} className={cn(!input && 'bg-white/5')}>
                   <th scope="row" className="px-1 py-1.5 text-left font-medium text-ink">
                     <label htmlFor={`m-${def.key}`} className="flex items-center gap-1.5">
                       {!input && <Calculator aria-hidden className="size-3.5 text-ink-3" />}
@@ -102,7 +102,7 @@ export function MeasurementsStep({ state, update, context }) {
                           }}
                         />
                         {out && (
-                          <p id={`w-${def.key}`} className="mt-0.5 flex items-center justify-end gap-1 text-[11px] text-amber-700">
+                          <p id={`w-${def.key}`} className="mt-0.5 flex items-center justify-end gap-1 text-[11px] text-amber-300">
                             <AlertTriangle aria-hidden className="size-3" /> Fuera del rango habitual ({def.min}–{def.max})
                           </p>
                         )}

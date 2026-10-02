@@ -12,11 +12,11 @@ import { useAppointments } from './hooks.js';
 
 const HOUR_PX = 56;
 const STATUS_STYLE = {
-  programada: 'border-dashed border-slate-400 bg-white text-ink',
-  confirmada: 'border-brand-600 bg-brand-50 text-brand-900',
-  realizada: 'border-emerald-300 bg-emerald-50/70 text-emerald-900 opacity-80',
-  cancelada: 'border-slate-200 bg-slate-50 text-ink-3 line-through opacity-60',
-  no_asistio: 'border-amber-300 bg-amber-50 text-amber-900',
+  programada: 'border-dashed border-white/35 bg-surface-2 text-ink',
+  confirmada: 'border-brand-600 bg-brand-50 text-accent',
+  realizada: 'border-emerald-300/30 bg-emerald-400/10 text-emerald-200 opacity-80',
+  cancelada: 'border-white/20 bg-white/5 text-ink-3 line-through opacity-60',
+  no_asistio: 'border-amber-300/30 bg-amber-400/15 text-amber-200',
 };
 
 const startOfWeek = (d) => {
@@ -124,10 +124,10 @@ export function AgendaPage() {
         <div className={cn('card overflow-hidden', query.isFetching && 'opacity-80')}>
           <div className="overflow-x-auto scrollbar-thin">
             <div className="min-w-[640px]" style={view === 'dia' ? { minWidth: 0 } : undefined}>
-              <div className="grid border-b border-line bg-slate-50/70" style={{ gridTemplateColumns: `56px repeat(${days.length}, minmax(0,1fr))` }}>
+              <div className="grid border-b border-line bg-white/5" style={{ gridTemplateColumns: `56px repeat(${days.length}, minmax(0,1fr))` }}>
                 <span />
                 {days.map((d) => (
-                  <div key={d.toISOString()} className={cn('px-2 py-2 text-center text-xs font-medium', isSameDay(d, new Date()) ? 'text-brand-800' : 'text-ink-3')}>
+                  <div key={d.toISOString()} className={cn('px-2 py-2 text-center text-xs font-medium', isSameDay(d, new Date()) ? 'text-accent' : 'text-ink-3')}>
                     <span className="">{d.toLocaleDateString('es-MX', { weekday: 'short' })}</span>{' '}
                     <span className={cn('inline-grid size-6 place-items-center rounded-full tabular', isSameDay(d, new Date()) && 'bg-brand-700 text-white')}>{d.getDate()}</span>
                   </div>
@@ -207,7 +207,7 @@ function DayColumn({ day, openH, closeH, items, types, showWho, onOpen, onNew })
                 className="block h-1/2 w-full transition-colors hover:bg-brand-50/70 focus-visible:bg-brand-50"
               />
             ) : (
-              <span key={m} className={cn('block h-1/2', past && 'bg-slate-50/50')} />
+              <span key={m} className={cn('block h-1/2', past && 'bg-white/5')} />
             );
           })}
         </div>
@@ -258,7 +258,7 @@ function ListView({ items, loading, types, onOpen }) {
           <ul className="divide-y divide-line/70">
             {list.map((a) => (
               <li key={a.id}>
-                <button type="button" onClick={() => onOpen(a.id)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-slate-900/[0.03]">
+                <button type="button" onClick={() => onOpen(a.id)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-white/[0.06]">
                   <span className="w-12 text-sm font-semibold text-ink tabular">{fmtTimeOf(a.start)}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium text-ink">{fullName(a.patient)}</span>

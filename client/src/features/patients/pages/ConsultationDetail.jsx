@@ -60,7 +60,7 @@ export function ConsultationDetail() {
         {soap && Object.values(soap).some(Boolean) && (
           <dl className="mt-4 grid gap-3 sm:grid-cols-2">
             {SOAP.filter(([k]) => soap[k]).map(([k, label]) => (
-              <div key={k} className="rounded-xl bg-slate-50 p-3">
+              <div key={k} className="rounded-xl bg-white/5 p-3">
                 <dt className="text-xs font-semibold uppercase tracking-wide text-ink-3">
                   {k.toUpperCase()} · {label}
                 </dt>
@@ -107,7 +107,7 @@ export function ConsultationDetail() {
       <QuestionSection n="②" question={`Adendas (${c.addenda?.length ?? 0})`}>
         <ul className="space-y-2">
           {c.addenda?.map((a) => (
-            <li key={a.id ?? a._id} className="rounded-xl border border-line bg-white p-3">
+            <li key={a.id ?? a._id} className="rounded-xl border border-line bg-surface-2 p-3">
               <p className="whitespace-pre-line text-sm text-ink">{a.text}</p>
               <p className="mt-1 text-xs text-ink-3">
                 {fmtDateTime(a.at)} · {a.by?.name}

@@ -61,7 +61,7 @@ export function Attachments({ patientId, kind, consultationId, readOnly }) {
       ) : photos ? (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
           {items.map((a) => (
-            <li key={a.id} className={cn('group relative overflow-hidden rounded-xl border bg-white', compare.includes(a.id) ? 'border-brand-600 ring-2 ring-brand-600/30' : 'border-line')}>
+            <li key={a.id} className={cn('group relative overflow-hidden rounded-xl border bg-surface-2', compare.includes(a.id) ? 'border-brand-600 ring-2 ring-brand-600/30' : 'border-line')}>
               <button type="button" className="block w-full" onClick={() => setViewer({ single: a })} aria-label={`Ver foto del ${fmtDate(a.takenAt)}`}>
                 <Thumb patientId={patientId} attachment={a} />
               </button>
@@ -125,7 +125,7 @@ function Thumb({ patientId, attachment, large }) {
   if (url.isPending) return <Skeleton className={cn('w-full rounded-none', large ? 'h-[60vh]' : 'aspect-[3/4]')} />;
   if (url.isError || failed)
     return (
-      <div className={cn('grid w-full place-items-center bg-slate-100 text-ink-3', large ? 'h-64' : 'aspect-[3/4]')}>
+      <div className={cn('grid w-full place-items-center bg-white/10 text-ink-3', large ? 'h-64' : 'aspect-[3/4]')}>
         <ImageOff aria-hidden className="size-6" />
       </div>
     );
@@ -134,7 +134,7 @@ function Thumb({ patientId, attachment, large }) {
       src={url.data.url}
       alt={`Fotografía del ${fmtDate(attachment.takenAt)}`}
       onError={() => setFailed(true)}
-      className={cn('w-full bg-slate-100 object-cover', large ? 'max-h-[70vh] object-contain' : 'aspect-[3/4]')}
+      className={cn('w-full bg-white/10 object-cover', large ? 'max-h-[70vh] object-contain' : 'aspect-[3/4]')}
       loading="lazy"
     />
   );
@@ -160,7 +160,7 @@ function OpenFile({ patientId, attachment }) {
     }
   };
   return (
-    <button type="button" onClick={open} className="truncate text-left text-sm font-medium text-brand-700 hover:underline">
+    <button type="button" onClick={open} className="truncate text-left text-sm font-medium text-accent hover:underline">
       {attachment.originalName ?? 'Documento'}
     </button>
   );
@@ -225,7 +225,7 @@ function UploadModal({ patientId, kind, consultationId, onClose }) {
                 setFile(e.target.files?.[0] ?? null);
                 setError(null);
               }}
-              className="block w-full text-sm text-ink-2 file:mr-3 file:rounded-lg file:border-0 file:bg-brand-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-brand-800 hover:file:bg-brand-100"
+              className="block w-full text-sm text-ink-2 file:mr-3 file:rounded-lg file:border-0 file:bg-brand-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-accent hover:file:bg-brand-100"
             />
           )}
         </Field>

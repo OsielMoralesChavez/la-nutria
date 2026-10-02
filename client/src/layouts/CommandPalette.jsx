@@ -94,7 +94,7 @@ function PaletteBody({ mode, onClose }) {
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-start justify-center px-3 pt-[10vh]">
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] animate-fade-in" onClick={onClose} aria-hidden />
-      <div role="dialog" aria-modal="true" aria-label="Buscar" className="glass-strong relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/60 shadow-[var(--shadow-pop)] animate-slide-up">
+      <div role="dialog" aria-modal="true" aria-label="Buscar" className="glass-strong relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 shadow-[var(--shadow-pop)] animate-slide-up">
         <div className="flex items-center gap-3 border-b border-line/70 px-4">
           <Search aria-hidden className="size-5 text-ink-3" />
           <input
@@ -110,9 +110,9 @@ function PaletteBody({ mode, onClose }) {
             aria-controls="palette-list"
             aria-activedescendant={items[active] ? `pal-${items[active].id}` : undefined}
             placeholder={mode === 'consultation' ? 'Nueva consulta: busca al paciente…' : 'Busca un paciente (nombre o teléfono) o una acción…'}
-            className="h-14 flex-1 bg-transparent text-base text-ink placeholder:text-slate-400 focus:outline-none"
+            className="h-14 flex-1 bg-transparent text-base text-ink placeholder:text-ink-3 focus:outline-none"
           />
-          {(patients.isFetching || start.isPending) && <Spinner className="size-4 text-brand-700" />}
+          {(patients.isFetching || start.isPending) && <Spinner className="size-4 text-accent" />}
         </div>
         <ul id="palette-list" role="listbox" className="max-h-[50vh] overflow-y-auto p-2 scrollbar-thin">
           {term.length >= 2 && patients.isSuccess && patientItems.length === 0 && (
@@ -147,7 +147,7 @@ function PaletteBody({ mode, onClose }) {
                         e.stopPropagation();
                         select(item, true);
                       }}
-                      className="hidden items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-brand-700 hover:bg-brand-50 sm:inline-flex"
+                      className="hidden items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-accent hover:bg-brand-50 sm:inline-flex"
                       title="Iniciar consulta (Alt+Enter)"
                     >
                       <Stethoscope aria-hidden className="size-3.5" /> Consulta
@@ -156,7 +156,7 @@ function PaletteBody({ mode, onClose }) {
                 </>
               ) : (
                 <>
-                  <span className="grid size-7 place-items-center rounded-lg bg-slate-900/5 text-ink-2">
+                  <span className="grid size-7 place-items-center rounded-lg bg-white/10 text-ink-2">
                     <item.icon aria-hidden className="size-4" />
                   </span>
                   <span className="flex-1 text-sm text-ink-2">{item.label}</span>

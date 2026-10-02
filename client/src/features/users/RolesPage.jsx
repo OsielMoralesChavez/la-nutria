@@ -36,7 +36,7 @@ export function RolesPage() {
               type="button"
               onClick={() => setSelectedId(r.id)}
               aria-current={r.id === role.id}
-              className={cn('flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm', r.id === role.id ? 'bg-brand-700/10 font-semibold text-brand-800' : 'text-ink-2 hover:bg-slate-900/5')}
+              className={cn('flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm', r.id === role.id ? 'bg-brand-700/10 font-semibold text-accent' : 'text-ink-2 hover:bg-white/10')}
             >
               <ShieldCheck aria-hidden className="size-4" />
               <span className="flex-1">{r.name}</span>
@@ -129,7 +129,7 @@ function PermissionMatrix({ role, catalog, editable }) {
           </thead>
           <tbody className="divide-y divide-line/70">
             {Object.entries(resources).map(([r, def]) => (
-              <tr key={r} className="hover:bg-slate-900/[0.02]">
+              <tr key={r} className="hover:bg-white/[0.06]">
                 <th scope="row" className="px-3 py-2 text-left font-medium text-ink">
                   {def.label}
                 </th>
@@ -185,7 +185,7 @@ function PermissionMatrix({ role, catalog, editable }) {
         <div className="space-y-3 text-sm">
           {added.length > 0 && (
             <div>
-              <p className="font-semibold text-emerald-800">Se agregará</p>
+              <p className="font-semibold text-emerald-200">Se agregará</p>
               <ul className="mt-1 list-inside list-disc text-ink-2">
                 {added.map((p) => (
                   <li key={p}>{label(p)}</li>
@@ -195,7 +195,7 @@ function PermissionMatrix({ role, catalog, editable }) {
           )}
           {removed.length > 0 && (
             <div>
-              <p className="font-semibold text-red-800">Se quitará</p>
+              <p className="font-semibold text-red-200">Se quitará</p>
               <ul className="mt-1 list-inside list-disc text-ink-2">
                 {removed.map((p) => (
                   <li key={p}>{label(p)}</li>

@@ -44,7 +44,7 @@ export function LoginPage() {
           <Logo size="lg" />
           <p className="mt-3 text-sm text-ink-3">Gestión y seguimiento nutricional</p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="glass-strong space-y-4 rounded-2xl border border-white/60 p-6 shadow-[var(--shadow-pop)]">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="glass-strong space-y-4 rounded-2xl border border-white/15 p-6 shadow-[var(--shadow-pop)]">
           <h1 className="text-lg font-semibold text-ink">Iniciar sesión</h1>
           {expired && !error && <Alert tone="info">Tu sesión expiró. Vuelve a iniciar sesión.</Alert>}
           {error && <Alert tone="error">{error}</Alert>}

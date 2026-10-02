@@ -26,7 +26,7 @@ export function SlotPicker({ date, onDate, value, onChange, nutritionist, durati
                   type="button"
                   aria-pressed={sel}
                   onClick={() => onChange(s.start)}
-                  className={cn('rounded-lg border px-2.5 py-1.5 text-sm tabular', sel ? 'border-brand-700 bg-brand-700 text-white' : 'border-line bg-white text-ink-2 hover:border-brand-400')}
+                  className={cn('rounded-lg border px-2.5 py-1.5 text-sm tabular', sel ? 'border-brand-700 bg-brand-700 text-white' : 'border-line bg-surface-2 text-ink-2 hover:border-brand-400')}
                 >
                   {fmtTimeOf(s.start)}
                 </button>

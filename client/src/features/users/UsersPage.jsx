@@ -49,7 +49,7 @@ export function UsersPage() {
       {users.data?.length > 0 && (
         <div className="card overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
-            <thead className="border-b border-line bg-slate-50/70 text-left text-xs text-ink-3">
+            <thead className="border-b border-line bg-white/5 text-left text-xs text-ink-3">
               <tr>
                 <th scope="col" className="px-4 py-2.5 font-medium">Usuario</th>
                 <th scope="col" className="px-3 py-2.5 font-medium">Rol</th>
@@ -80,7 +80,7 @@ export function UsersPage() {
                     </td>
                     <td className="px-3 py-2.5">
                       {u.status === 'activo' ? <Badge tone="green" icon={UserCheck}>Activo</Badge> : <Badge icon={UserX}>Inactivo</Badge>}
-                      {u.mustChangePassword && <span className="ml-1 text-xs text-amber-700">· contraseña temporal</span>}
+                      {u.mustChangePassword && <span className="ml-1 text-xs text-amber-300">· contraseña temporal</span>}
                     </td>
                     <td className="px-3 py-2.5 text-ink-2">{u.lastLoginAt ? fmtRelative(u.lastLoginAt) : 'Nunca'}</td>
                     <td className="px-3 py-2.5 text-right text-ink-2 tabular">{u.patientCount}</td>
@@ -302,7 +302,7 @@ function SecretModal({ secret, onClose }) {
         <p className="text-sm text-ink-2">
           Entrega esta contraseña a <strong>{secret.name}</strong> ({secret.email}) por un medio seguro. No se volverá a mostrar y deberá cambiarla al entrar.
         </p>
-        <div className="flex items-center gap-2 rounded-xl border border-line bg-slate-50 px-3 py-2">
+        <div className="flex items-center gap-2 rounded-xl border border-line bg-white/5 px-3 py-2">
           <code className="flex-1 select-all font-mono text-base tracking-wider text-ink">{secret.password}</code>
           <IconButton
             icon={Copy}
@@ -318,7 +318,7 @@ function SecretModal({ secret, onClose }) {
             }}
           />
         </div>
-        {copied && <p className="text-xs text-emerald-700">Copiada al portapapeles.</p>}
+        {copied && <p className="text-xs text-emerald-300">Copiada al portapapeles.</p>}
       </div>
     </Modal>
   );

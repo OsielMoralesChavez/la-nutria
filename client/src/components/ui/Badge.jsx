@@ -22,13 +22,13 @@ import {
 import { cn } from '../../lib/cn.js';
 
 const TONES = {
-  neutral: 'bg-slate-100 text-slate-700 ring-slate-200',
-  brand: 'bg-brand-50 text-brand-800 ring-brand-200',
-  green: 'bg-emerald-50 text-emerald-800 ring-emerald-200',
-  amber: 'bg-amber-50 text-amber-800 ring-amber-200',
-  red: 'bg-red-50 text-red-800 ring-red-200',
-  sky: 'bg-sky-50 text-sky-800 ring-sky-200',
-  violet: 'bg-violet-50 text-violet-800 ring-violet-200',
+  neutral: 'bg-white/10 text-ink-2 ring-white/20',
+  brand: 'bg-brand-50 text-accent ring-brand-200',
+  green: 'bg-emerald-400/15 text-emerald-200 ring-emerald-300/30',
+  amber: 'bg-amber-400/15 text-amber-200 ring-amber-300/30',
+  red: 'bg-red-400/15 text-red-200 ring-red-300/30',
+  sky: 'bg-sky-400/15 text-sky-200 ring-sky-300/30',
+  violet: 'bg-violet-400/15 text-violet-200 ring-violet-300/30',
 };
 
 export function Badge({ tone = 'neutral', icon: Icon, children, className, size = 'md' }) {

@@ -2,9 +2,9 @@ import { forwardRef, useId } from 'react';
 import { cn } from '../../lib/cn.js';
 
 const control =
-  'block w-full rounded-xl border border-line bg-white px-3 text-sm text-ink placeholder:text-slate-400 shadow-xs transition-colors ' +
-  'hover:border-slate-300 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15 focus:outline-none ' +
-  'disabled:bg-slate-50 disabled:text-ink-3 aria-[invalid=true]:border-red-500 aria-[invalid=true]:focus:ring-red-500/15';
+  'block w-full rounded-xl border border-line bg-surface-2 px-3 text-sm text-ink placeholder:text-ink-3 shadow-xs transition-colors ' +
+  'hover:border-white/20 focus:border-brand-600 focus:ring-3 focus:ring-brand-600/15 focus:outline-none ' +
+  'disabled:bg-white/5 disabled:text-ink-3 aria-[invalid=true]:border-red-500 aria-[invalid=true]:focus:ring-red-500/15';
 
 /**
  * Campo de formulario: etiqueta, ayuda y error asociados por aria.
@@ -21,7 +21,7 @@ export function Field({ label, hint, error, required, className, children, label
         <label htmlFor={id} className={cn('text-sm font-medium text-ink-2', labelHidden && 'sr-only')}>
           {label}
           {required && (
-            <span className="text-red-600" aria-hidden>
+            <span className="text-red-300" aria-hidden>
               {' '}
               *
             </span>
@@ -35,7 +35,7 @@ export function Field({ label, hint, error, required, className, children, label
         </p>
       )}
       {error && (
-        <p id={errId} role="alert" className="text-xs font-medium text-red-700">
+        <p id={errId} role="alert" className="text-xs font-medium text-red-300">
           {error}
         </p>
       )}
@@ -54,7 +54,7 @@ export const Textarea = forwardRef(function Textarea({ className, rows = 3, ...p
 export const Select = forwardRef(function Select({ className, children, ...props }, ref) {
   return (
     <select ref={ref} className={cn(control, 'h-10 pr-8 appearance-none bg-[length:16px] bg-[right_0.6rem_center] bg-no-repeat', className)}
-      style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+      style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cbc8f0' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
       {...props}
     >
       {children}
@@ -88,7 +88,7 @@ export function Checkbox({ label, description, className, ...props }) {
   const id = useId();
   return (
     <div className={cn('flex items-start gap-2.5', className)}>
-      <input id={id} type="checkbox" className="mt-0.5 size-4 rounded border-slate-300 text-brand-700 accent-brand-700 focus-visible:outline-2" {...props} />
+      <input id={id} type="checkbox" className="mt-0.5 size-4 rounded border-white/20 text-accent accent-brand-700 focus-visible:outline-2" {...props} />
       <label htmlFor={id} className="text-sm leading-tight text-ink-2">
         {label}
         {description && <span className="block text-xs text-ink-3">{description}</span>}
@@ -109,7 +109,7 @@ export function Switch({ checked, onChange, label, disabled, className }) {
       onClick={() => onChange(!checked)}
       className={cn(
         'relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors disabled:opacity-50',
-        checked ? 'bg-brand-700' : 'bg-slate-300',
+        checked ? 'bg-brand-700' : 'bg-white/25',
         className,
       )}
     >
@@ -121,7 +121,7 @@ export function Switch({ checked, onChange, label, disabled, className }) {
 /** Control segmentado (p. ej. Libre | SOAP | Ambos, Día | Semana | Lista). */
 export function SegmentedControl({ value, onChange, options, label, size = 'md', className }) {
   return (
-    <div role="radiogroup" aria-label={label} className={cn('inline-flex rounded-xl bg-slate-900/5 p-1', className)}>
+    <div role="radiogroup" aria-label={label} className={cn('inline-flex rounded-xl bg-white/10 p-1', className)}>
       {options.map((o) => {
         const active = o.value === value;
         const Icon = o.icon;
@@ -135,7 +135,7 @@ export function SegmentedControl({ value, onChange, options, label, size = 'md',
             className={cn(
               'inline-flex items-center gap-1.5 rounded-lg font-medium transition-all',
               size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm',
-              active ? 'bg-white text-ink shadow-sm' : 'text-ink-3 hover:text-ink',
+              active ? 'bg-white/20 text-ink shadow-sm' : 'text-ink-3 hover:text-ink',
             )}
           >
             {Icon && <Icon aria-hidden className="size-4" />}

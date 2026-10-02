@@ -83,7 +83,7 @@ export function PatientProgress() {
                 onClick={() => toggle(m.key)}
                 className={cn(
                   'rounded-lg border px-2.5 py-1 text-xs font-medium transition-colors',
-                  selected.includes(m.key) ? 'border-brand-600 bg-brand-50 text-brand-800' : 'border-line bg-white text-ink-3 hover:text-ink',
+                  selected.includes(m.key) ? 'border-brand-600 bg-brand-50 text-accent' : 'border-line bg-surface-2 text-ink-3 hover:text-ink',
                 )}
               >
                 {m.label}

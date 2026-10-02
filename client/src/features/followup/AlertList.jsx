@@ -45,7 +45,7 @@ export function AlertList({ params, emptyTitle = 'Todo al día', emptyDescriptio
             <div className="flex min-w-0 flex-1 items-start gap-3">
               <StatusBadge kind="severity" status={a.severity} size="sm" className="mt-0.5" />
               <div className="min-w-0">
-                <Link to={`/pacientes/${a.patient?.id}`} className="text-sm font-semibold text-ink hover:text-brand-700">
+                <Link to={`/pacientes/${a.patient?.id}`} className="text-sm font-semibold text-ink hover:text-accent">
                   {fullName(a.patient)}
                 </Link>
                 <p className="text-sm text-ink-2">{a.message}</p>

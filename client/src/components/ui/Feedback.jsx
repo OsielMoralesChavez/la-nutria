@@ -4,10 +4,10 @@ import { cn } from '../../lib/cn.js';
 import { Button } from './Button.jsx';
 
 const ALERT_TONES = {
-  info: ['bg-sky-50 border-sky-200 text-sky-900', Info, 'text-sky-600'],
-  success: ['bg-emerald-50 border-emerald-200 text-emerald-900', CheckCircle2, 'text-emerald-600'],
-  warning: ['bg-amber-50 border-amber-200 text-amber-900', AlertTriangle, 'text-amber-600'],
-  error: ['bg-red-50 border-red-200 text-red-900', XCircle, 'text-red-600'],
+  info: ['bg-sky-400/15 border-sky-300/30 text-sky-200', Info, 'text-sky-300'],
+  success: ['bg-emerald-400/15 border-emerald-300/30 text-emerald-200', CheckCircle2, 'text-emerald-300'],
+  warning: ['bg-amber-400/15 border-amber-300/30 text-amber-200', AlertTriangle, 'text-amber-300'],
+  error: ['bg-red-400/15 border-red-300/30 text-red-200', XCircle, 'text-red-300'],
 };
 
 /** Mensaje en línea (no confundir con las alertas clínico-operativas del sistema). */
@@ -30,7 +30,7 @@ export function EmptyState({ icon: Icon, title, description, action, className, 
   return (
     <div className={cn('flex flex-col items-center justify-center text-center', compact ? 'gap-2 py-6' : 'gap-3 py-12', className)}>
       {Icon && (
-        <div className={cn('grid place-items-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100', compact ? 'size-10' : 'size-14')}>
+        <div className={cn('grid place-items-center rounded-2xl bg-brand-50 text-accent ring-1 ring-brand-100', compact ? 'size-10' : 'size-14')}>
           <Icon aria-hidden className={compact ? 'size-5' : 'size-7'} />
         </div>
       )}
@@ -44,7 +44,7 @@ export function EmptyState({ icon: Icon, title, description, action, className, 
 }
 
 export function Skeleton({ className }) {
-  return <div aria-hidden className={cn('animate-pulse rounded-lg bg-slate-200/70', className)} />;
+  return <div aria-hidden className={cn('animate-pulse rounded-lg bg-white/10', className)} />;
 }
 
 /** Skeleton con forma de lista/tabla (mientras carga). */

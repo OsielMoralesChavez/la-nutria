@@ -6,7 +6,7 @@ import { useAuth } from './AuthProvider.jsx';
 export function FullScreenLoader() {
   return (
     <div className="grid min-h-dvh place-items-center">
-      <div className="flex flex-col items-center gap-3 text-brand-700">
+      <div className="flex flex-col items-center gap-3 text-accent">
         <Spinner className="size-8" label="Cargando La Nutria" />
         <p className="text-sm text-ink-3">Cargando…</p>
       </div>

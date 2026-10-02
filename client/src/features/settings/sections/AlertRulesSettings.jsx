@@ -108,7 +108,7 @@ function RuleCard({ rule }) {
           )}
         </Field>
       </div>
-      {missingRequired && <p className="mt-2 text-xs text-amber-700">Define el valor para poder activar esta regla.</p>}
+      {missingRequired && <p className="mt-2 text-xs text-amber-300">Define el valor para poder activar esta regla.</p>}
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Button size="sm" variant="ghost" icon={Eye} loading={doPreview.isPending} disabled={missingRequired} onClick={() => doPreview.mutate()}>

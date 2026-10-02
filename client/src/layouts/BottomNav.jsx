@@ -22,7 +22,7 @@ export function BottomNav({ onMore }) {
                 to={item.path}
                 end={item.end}
                 className={({ isActive }) =>
-                  cn('relative flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium', isActive ? 'text-brand-800' : 'text-ink-3')
+                  cn('relative flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium', isActive ? 'text-accent' : 'text-ink-3')
                 }
               >
                 <span className="relative">

@@ -47,9 +47,9 @@ export function GoalsStep({ state, update, context }) {
               const status = u.status ?? goal.status;
               const measuredToday = goal.metric && today[goal.metric] !== undefined;
               return (
-                <li key={goal.id} className={cn('rounded-xl border p-3.5', status !== 'en_curso' ? 'border-emerald-200 bg-emerald-50/40' : 'border-line bg-white')}>
+                <li key={goal.id} className={cn('rounded-xl border p-3.5', status !== 'en_curso' ? 'border-emerald-300/30 bg-emerald-400/10' : 'border-line bg-surface-2')}>
                   <div className="flex flex-wrap items-start gap-2">
-                    <Target aria-hidden className="mt-0.5 size-4 text-brand-700" />
+                    <Target aria-hidden className="mt-0.5 size-4 text-accent" />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-ink">{goal.title}</p>
                       {goal.dueDate && <p className="text-xs text-ink-3">Fecha objetivo: {fmtDate(goal.dueDate)}</p>}
@@ -68,7 +68,7 @@ export function GoalsStep({ state, update, context }) {
                       {goal.direction !== 'mantener' && <ProgressBar value={progress.ratio} label={`Progreso de ${goal.title}`} />}
                       <div className="mt-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-ink-3 tabular">
                         <span>Inicio {fmtNum(goal.baseline, metric?.decimals)}</span>
-                        <span className={cn('font-semibold', measuredToday ? 'text-brand-800' : 'text-ink')}>
+                        <span className={cn('font-semibold', measuredToday ? 'text-accent' : 'text-ink')}>
                           {measuredToday ? 'Hoy' : 'Actual'} {fmtNum(value, metric?.decimals)}
                           {goal.direction === 'mantener'
                             ? progress.withinTolerance
@@ -125,7 +125,7 @@ export function GoalsStep({ state, update, context }) {
                   )}
 
                   {progress.reached && status === 'en_curso' && (
-                    <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+                    <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-emerald-400/15 px-3 py-2 text-xs text-emerald-200">
                       <span className="inline-flex items-center gap-1.5">
                         <CheckCircle2 aria-hidden className="size-4" /> {measuredToday ? 'Con la medición de hoy se alcanza la meta.' : 'La meta está alcanzada.'}
                       </span>
@@ -158,7 +158,7 @@ export function GoalsStep({ state, update, context }) {
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-sm font-semibold text-ink">Objetivo nuevo {i + 1}</p>
                   <div className="flex items-center gap-2">
-                    {!isGoalDraftValid(d, types.data) && <span className="text-xs text-amber-700">Incompleto</span>}
+                    {!isGoalDraftValid(d, types.data) && <span className="text-xs text-amber-300">Incompleto</span>}
                     <IconButton icon={Trash2} label="Quitar objetivo" size="sm" onClick={() => removeDraft(d.tmpId)} />
                   </div>
                 </div>

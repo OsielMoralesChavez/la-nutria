@@ -71,7 +71,7 @@ export function ForcedPasswordChangePage() {
         <div className="mb-6 flex justify-center">
           <Logo size="lg" />
         </div>
-        <div className="glass-strong rounded-2xl border border-white/60 p-6 shadow-[var(--shadow-pop)]">
+        <div className="glass-strong rounded-2xl border border-white/15 p-6 shadow-[var(--shadow-pop)]">
           <h1 className="text-lg font-semibold text-ink">Crea tu contraseña</h1>
           <p className="mb-4 mt-1 text-sm text-ink-3">Entraste con una contraseña temporal. Por seguridad, define una nueva para continuar.</p>
           <ChangePasswordForm onDone={() => navigate('/', { replace: true })} />

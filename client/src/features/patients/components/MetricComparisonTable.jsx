@@ -34,11 +34,11 @@ export function MetricComparisonTable({ metrics, selected, onSelect, compareTo =
               <tr
                 key={m.key}
                 onClick={onSelect ? () => onSelect(m.key) : undefined}
-                className={cn(onSelect && 'cursor-pointer', isSel ? 'bg-brand-50/70' : onSelect && 'hover:bg-slate-900/[0.03]')}
+                className={cn(onSelect && 'cursor-pointer', isSel ? 'bg-brand-50/70' : onSelect && 'hover:bg-white/[0.06]')}
               >
                 <th scope="row" className="px-2 py-2 text-left font-medium text-ink">
                   {onSelect ? (
-                    <button type="button" className={cn('text-left', isSel && 'text-brand-800')} aria-pressed={isSel} onClick={() => onSelect(m.key)}>
+                    <button type="button" className={cn('text-left', isSel && 'text-accent')} aria-pressed={isSel} onClick={() => onSelect(m.key)}>
                       {m.label}
                     </button>
                   ) : (

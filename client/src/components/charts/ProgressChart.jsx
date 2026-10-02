@@ -12,15 +12,15 @@ import { fmtDate, fmtDateFull, fmtDelta, fmtNum } from '../../lib/format.js';
  * - Si las tomas usan métodos distintos, el marcador cambia de forma y se avisa.
  * - Tooltip con fecha, valor, cambio y método; vista de tabla equivalente.
  */
-const INK = { line: 'var(--color-brand-700)', grid: '#e2e8f0', axis: '#64748b', target: '#b45309', marker: '#94a3b8' };
+const INK = { line: '#a9a7ff', grid: 'rgba(255,255,255,0.12)', axis: '#cbc8f0', target: '#fbbf24', marker: 'rgba(255,255,255,0.35)', ring: '#2b2766' };
 
 function Dot({ cx, cy, payload, methods }) {
   if (cx == null || cy == null) return null;
   const alt = methods.length > 1 && payload.method && payload.method !== methods[0];
   return alt ? (
-    <rect x={cx - 4.5} y={cy - 4.5} width={9} height={9} rx={1.5} fill="white" stroke={INK.line} strokeWidth={2} />
+    <rect x={cx - 4.5} y={cy - 4.5} width={9} height={9} rx={1.5} fill={INK.ring} stroke={INK.line} strokeWidth={2} />
   ) : (
-    <circle cx={cx} cy={cy} r={4.5} fill={INK.line} stroke="white" strokeWidth={2} />
+    <circle cx={cx} cy={cy} r={4.5} fill={INK.line} stroke={INK.ring} strokeWidth={2} />
   );
 }
 
@@ -28,7 +28,7 @@ function ChartTooltip({ active, payload, unit, decimals, methodLabels }) {
   if (!active || !payload?.length) return null;
   const p = payload[0].payload;
   return (
-    <div className="glass-strong rounded-xl border border-white/60 px-3 py-2 text-xs shadow-[var(--shadow-pop)]">
+    <div className="glass-strong rounded-xl border border-white/15 px-3 py-2 text-xs shadow-[var(--shadow-pop)]">
       <p className="font-medium text-ink-3">{fmtDateFull(p.date)}</p>
       <p className="mt-0.5 text-sm font-semibold text-ink tabular">{fmtNum(p.value, decimals, unit)}</p>
       {p.delta !== null && <p className="text-ink-3 tabular">{fmtDelta(p.delta, decimals)} vs. anterior</p>}
@@ -68,7 +68,7 @@ export function ProgressChart({ label, unit, decimals = 1, points = [], target, 
         <button
           type="button"
           onClick={() => setAsTable((v) => !v)}
-          className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-ink-3 hover:bg-slate-900/5 hover:text-ink"
+          className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-ink-3 hover:bg-white/10 hover:text-ink"
           aria-pressed={asTable}
         >
           {asTable ? <LineIcon aria-hidden className="size-3.5" /> : <Table2 aria-hidden className="size-3.5" />}
@@ -80,7 +80,7 @@ export function ProgressChart({ label, unit, decimals = 1, points = [], target, 
       {asTable ? (
         <div className="max-h-[320px] overflow-auto rounded-xl border border-line scrollbar-thin">
           <table className="w-full text-sm">
-            <thead className="sticky top-0 bg-slate-50 text-left text-xs text-ink-3">
+            <thead className="sticky top-0 bg-white/5 text-left text-xs text-ink-3">
               <tr>
                 <th scope="col" className="px-3 py-2">Fecha</th>
                 <th scope="col" className="px-3 py-2 text-right">Valor</th>
@@ -147,7 +147,7 @@ export function ProgressChart({ label, unit, decimals = 1, points = [], target, 
                 stroke={INK.line}
                 strokeWidth={2}
                 dot={<Dot methods={methods} />}
-                activeDot={{ r: 6, fill: INK.line, stroke: 'white', strokeWidth: 2 }}
+                activeDot={{ r: 6, fill: INK.line, stroke: INK.ring, strokeWidth: 2 }}
                 isAnimationActive={false}
               />
             </LineChart>
@@ -160,7 +160,7 @@ export function ProgressChart({ label, unit, decimals = 1, points = [], target, 
             <span className="inline-block size-2.5 rounded-full bg-brand-700" /> {methodLabels?.[methods[0]] ?? methods[0]}
           </span>
           <span className="inline-flex items-center gap-1">
-            <span className="inline-block size-2.5 rounded-sm border-2 border-brand-700 bg-white" /> Otro método
+            <span className="inline-block size-2.5 rounded-sm border-2 border-brand-700 bg-surface-2" /> Otro método
           </span>
           <span>· Comparar métodos distintos puede no ser equivalente.</span>
         </p>

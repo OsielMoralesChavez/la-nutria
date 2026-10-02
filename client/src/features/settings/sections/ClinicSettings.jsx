@@ -72,7 +72,7 @@ function ClinicForm({ initial }) {
                         openingHours: { ...form.clinic.openingHours, days: on ? form.clinic.openingHours.days.filter((x) => x !== d) : [...form.clinic.openingHours.days, d] },
                       })
                     }
-                    className={cn('w-12 rounded-lg border py-1.5 text-sm font-medium', on ? 'border-brand-600 bg-brand-50 text-brand-800' : 'border-line bg-white text-ink-3')}
+                    className={cn('w-12 rounded-lg border py-1.5 text-sm font-medium', on ? 'border-brand-600 bg-brand-50 text-accent' : 'border-line bg-surface-2 text-ink-3')}
                   >
                     {label}
                   </button>

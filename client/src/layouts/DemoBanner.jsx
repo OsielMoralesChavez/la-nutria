@@ -7,7 +7,7 @@ import { snapshotInfo } from '../lib/staticDemo.js';
 export function DemoBanner() {
   const info = useQuery({ queryKey: ['demo-info'], queryFn: snapshotInfo, staleTime: Infinity });
   return (
-    <div role="note" className="border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-center text-xs text-amber-900">
+    <div role="note" className="border-b border-amber-300/30 bg-amber-400/15 px-4 py-1.5 text-center text-xs text-amber-200">
       <Eye aria-hidden className="mr-1 inline size-3.5 align-[-2px]" />
       <strong>Demo de sólo lectura</strong> con datos ficticios
       {info.data?.generatedAt && <> · instantánea del {fmtDateFull(info.data.generatedAt)}</>}

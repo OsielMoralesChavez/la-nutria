@@ -29,7 +29,7 @@ export function SettingsLayout() {
               className={({ isActive }) =>
                 cn(
                   'flex shrink-0 items-center gap-2.5 rounded-xl px-3 py-2 text-sm',
-                  isActive ? 'bg-brand-700/10 font-semibold text-brand-800' : 'text-ink-2 hover:bg-slate-900/5',
+                  isActive ? 'bg-brand-700/10 font-semibold text-accent' : 'text-ink-2 hover:bg-white/10',
                 )
               }
             >

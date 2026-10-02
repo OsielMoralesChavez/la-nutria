@@ -43,12 +43,12 @@ export function PatientNext() {
                   <span className="text-xs text-ink-3">· {a.nutritionist?.name}</span>
                   <StatusBadge kind="appointment" status={a.status} size="sm" className="ml-auto" />
                   {a.consultation && (
-                    <Link to={`../intervenciones/consultas/${a.consultation}`} relative="path" className="text-xs font-medium text-brand-700 hover:underline">
+                    <Link to={`../intervenciones/consultas/${a.consultation}`} relative="path" className="text-xs font-medium text-accent hover:underline">
                       Ver consulta
                     </Link>
                   )}
                   {future && ['programada', 'confirmada'].includes(a.status) && (
-                    <Link to={`/agenda?cita=${a.id}`} className="text-xs font-medium text-brand-700 hover:underline">
+                    <Link to={`/agenda?cita=${a.id}`} className="text-xs font-medium text-accent hover:underline">
                       Gestionar
                     </Link>
                   )}

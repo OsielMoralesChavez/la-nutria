@@ -135,7 +135,7 @@ export function PatientsPage() {
               type="button"
               aria-pressed={activeView?.id === v.id}
               onClick={() => setParams(new URLSearchParams({ ...v.params, ...(filters.q && { q: filters.q }) }), { replace: true })}
-              className={cn('rounded-lg px-2.5 py-1 font-medium', activeView?.id === v.id ? 'bg-brand-700/10 text-brand-800' : 'text-ink-3 hover:bg-slate-900/5 hover:text-ink')}
+              className={cn('rounded-lg px-2.5 py-1 font-medium', activeView?.id === v.id ? 'bg-brand-700/10 text-accent' : 'text-ink-3 hover:bg-white/10 hover:text-ink')}
             >
               {v.label}
             </button>
@@ -147,7 +147,7 @@ export function PatientsPage() {
                 setTerm('');
                 setParams(new URLSearchParams(), { replace: true });
               }}
-              className="ml-auto text-xs font-medium text-brand-700 hover:underline"
+              className="ml-auto text-xs font-medium text-accent hover:underline"
             >
               Limpiar filtros
             </button>
@@ -207,7 +207,7 @@ function FilterChip({ active, onClick, icon: Icon, children }) {
       onClick={onClick}
       className={cn(
         'inline-flex h-9 items-center gap-1.5 rounded-xl border px-3 text-sm font-medium transition-colors',
-        active ? 'border-brand-600 bg-brand-50 text-brand-800' : 'border-line bg-white text-ink-2 hover:border-slate-300',
+        active ? 'border-brand-600 bg-brand-50 text-accent' : 'border-line bg-surface-2 text-ink-2 hover:border-white/20',
       )}
     >
       {Icon && <Icon aria-hidden className="size-4" />}
@@ -243,7 +243,7 @@ function RowActions({ patient, className }) {
           to={`/agenda?nueva=1&paciente=${patient.id}`}
           aria-label={`Agendar cita para ${patient.fullName}`}
           title="Agendar cita"
-          className="grid size-8 place-items-center rounded-lg text-ink-2 hover:bg-slate-900/5"
+          className="grid size-8 place-items-center rounded-lg text-ink-2 hover:bg-white/10"
         >
           <CalendarPlus aria-hidden className="size-4" />
         </Link>
@@ -256,7 +256,7 @@ function PatientTable({ patients }) {
   return (
     <div className="card hidden overflow-hidden md:block">
       <table className="w-full text-sm">
-        <thead className="border-b border-line bg-slate-50/70 text-left text-xs font-medium text-ink-3">
+        <thead className="border-b border-line bg-white/5 text-left text-xs font-medium text-ink-3">
           <tr>
             <th scope="col" className="px-4 py-2.5">Paciente</th>
             <th scope="col" className="px-3 py-2.5">Estado</th>
@@ -274,10 +274,10 @@ function PatientTable({ patients }) {
                 <Link to={`/pacientes/${p.id}`} className="flex items-center gap-3 rounded-lg">
                   <Avatar name={p.fullName} size="sm" />
                   <span className="min-w-0">
-                    <span className="flex items-center gap-1.5 font-medium text-ink group-hover:text-brand-800">
+                    <span className="flex items-center gap-1.5 font-medium text-ink group-hover:text-accent">
                       {p.fullName}
                       {p.openAlerts > 0 && (
-                        <AlertTriangle aria-label={`${p.openAlerts} alertas`} className="size-3.5 text-amber-600" />
+                        <AlertTriangle aria-label={`${p.openAlerts} alertas`} className="size-3.5 text-amber-300" />
                       )}
                     </span>
                     <span className="block text-xs text-ink-3">
@@ -316,7 +316,7 @@ function PatientCards({ patients }) {
             <span className="min-w-0 flex-1">
               <span className="flex items-center gap-1.5 truncate font-medium text-ink">
                 {p.fullName}
-                {p.openAlerts > 0 && <AlertTriangle aria-label="Con alertas" className="size-3.5 shrink-0 text-amber-600" />}
+                {p.openAlerts > 0 && <AlertTriangle aria-label="Con alertas" className="size-3.5 shrink-0 text-amber-300" />}
               </span>
               <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
                 <StatusBadge kind="patient" status={p.status} size="sm" />

@@ -104,7 +104,7 @@ export function ReviewStep({ state, context, goTo, onClose, closing, saveStatus 
 
       <div className="glass flex flex-col items-stretch gap-3 rounded-[var(--radius-card)] border p-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="flex items-center gap-2 text-sm text-ink-2">
-          {blockers.length ? <AlertTriangle aria-hidden className="size-4 text-red-600" /> : <CheckCircle2 aria-hidden className="size-4 text-emerald-600" />}
+          {blockers.length ? <AlertTriangle aria-hidden className="size-4 text-red-300" /> : <CheckCircle2 aria-hidden className="size-4 text-emerald-300" />}
           {blockers.length ? 'Corrige lo indicado para cerrar.' : 'Todo listo. Podrás agregar adendas después.'}
         </p>
         <div className="flex gap-2">

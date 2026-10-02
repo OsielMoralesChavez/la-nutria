@@ -5,11 +5,11 @@ import { Spinner } from './Spinner.jsx';
 
 const VARIANTS = {
   primary: 'bg-brand-700 text-white shadow-sm hover:bg-brand-800 active:bg-brand-900 disabled:bg-brand-700/50',
-  secondary: 'bg-white text-ink border border-line shadow-sm hover:bg-slate-50 hover:border-slate-300 active:bg-slate-100',
-  ghost: 'text-ink-2 hover:bg-slate-900/5 active:bg-slate-900/10',
-  subtle: 'bg-brand-50 text-brand-800 hover:bg-brand-100 active:bg-brand-200',
+  secondary: 'bg-surface-2 text-ink border border-line shadow-sm hover:bg-white/20 hover:border-white/25 active:bg-white/25',
+  ghost: 'text-ink-2 hover:bg-white/10 active:bg-white/15',
+  subtle: 'bg-brand-50 text-accent hover:bg-brand-100 active:bg-brand-200',
   danger: 'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800 disabled:bg-red-600/50',
-  'danger-ghost': 'text-red-700 hover:bg-red-50 active:bg-red-100',
+  'danger-ghost': 'text-red-300 hover:bg-red-400/15 active:bg-red-400/25',
 };
 
 const SIZES = {
@@ -58,7 +58,7 @@ export const IconButton = forwardRef(function IconButton({ icon: Icon, label, va
     <button ref={ref} type="button" aria-label={label} title={label} className={cn(base, VARIANTS[variant], dims, 'relative', className)} {...props}>
       <Icon aria-hidden className={size === 'sm' ? 'size-4' : 'size-5'} />
       {badge ? (
-        <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-red-600 text-white text-[10px] font-semibold leading-[18px] text-center ring-2 ring-white tabular">
+        <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-brand-600 text-white text-[10px] font-semibold leading-[18px] text-center ring-2 ring-[#2b2766] tabular">
           {badge > 99 ? '99+' : badge}
         </span>
       ) : null}

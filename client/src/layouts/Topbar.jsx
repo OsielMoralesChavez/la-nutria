@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Bell, CalendarPlus, KeyRound, LogOut, Menu, PanelLeftClose, PanelLeftOpen, Plus, Search, Settings, Stethoscope, User, UserPlus } from 'lucide-react';
+import { Bell, CalendarPlus, ChevronDown, KeyRound, LogOut, Menu, PanelLeftClose, PanelLeftOpen, Plus, Search, Settings, Stethoscope, User, UserPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { Avatar, Badge, IconButton, MenuItem, Popover, StatusBadge } from '../components/ui/index.js';
 import { useAuth } from '../features/auth/AuthProvider.jsx';
@@ -15,7 +15,7 @@ export function Topbar({ collapsed, onToggleSidebar, onOpenDrawer, onOpenSearch,
   const badges = useNavBadges();
 
   return (
-    <header className="glass sticky top-0 z-30 flex h-14 items-center gap-2 border-b px-3 sm:px-4">
+    <header className="glass sticky top-0 z-30 flex h-16 items-center gap-2 border-b px-3 sm:px-5 lg:top-5 lg:rounded-tr-[2rem]">
       <IconButton icon={Menu} label="Abrir menú" onClick={onOpenDrawer} className="lg:hidden" />
       <IconButton
         icon={collapsed ? PanelLeftOpen : PanelLeftClose}
@@ -23,23 +23,23 @@ export function Topbar({ collapsed, onToggleSidebar, onOpenDrawer, onOpenSearch,
         onClick={onToggleSidebar}
         className="hidden lg:inline-flex"
       />
-      <Link to="/" className="mr-2 rounded-lg" aria-label="La Nutria, ir al inicio">
-        <Logo compact={false} className="max-sm:[&>span:last-child]:hidden" />
+      <Link to="/" className="rounded-lg lg:hidden" aria-label="La Nutria, ir al inicio">
+        <Logo compact />
       </Link>
 
-      {/* Búsqueda: abre la paleta de comandos */}
+      {/* Búsqueda tipo píldora: abre la paleta de comandos */}
       <button
         type="button"
         onClick={onOpenSearch}
-        className="ml-auto flex h-10 items-center gap-2 rounded-xl border border-line bg-white/70 px-3 text-sm text-ink-3 transition-colors hover:border-slate-300 hover:text-ink-2 sm:ml-4 sm:w-72 lg:w-96"
+        className="flex h-11 min-w-0 flex-1 items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 text-sm text-ink-3 transition-colors hover:bg-white/15 hover:text-ink-2 sm:max-w-xl"
         aria-label="Buscar paciente o acción"
       >
-        <Search aria-hidden className="size-4" />
-        <span className="hidden flex-1 text-left sm:inline">Buscar paciente o acción…</span>
-        <kbd className="hidden rounded border border-line bg-white px-1.5 text-[11px] text-ink-3 sm:inline">Ctrl K</kbd>
+        <Search aria-hidden className="size-5 shrink-0" />
+        <span className="hidden flex-1 truncate text-left sm:inline">Buscar paciente o acción…</span>
+        <kbd className="hidden rounded-md border border-white/15 bg-white/10 px-1.5 text-[11px] text-ink-3 sm:inline">Ctrl K</kbd>
       </button>
 
-      <div className="ml-auto flex items-center gap-1 sm:ml-2">
+      <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
         {/* Acceso rápido */}
         {(can('patients:create') || can('appointments:create') || can('consultations:create')) && (
           <Popover
@@ -48,7 +48,7 @@ export function Topbar({ collapsed, onToggleSidebar, onOpenDrawer, onOpenSearch,
               <button
                 type="button"
                 {...p}
-                className="hidden h-10 items-center gap-1.5 rounded-xl bg-brand-700 px-3 text-sm font-medium text-white shadow-sm hover:bg-brand-800 sm:inline-flex"
+                className="hidden h-10 items-center gap-1.5 rounded-full bg-brand-700 px-4 text-sm font-medium text-white shadow-sm hover:bg-brand-800 sm:inline-flex"
               >
                 <Plus aria-hidden className="size-4" /> Nuevo
               </button>
@@ -83,9 +83,9 @@ export function Topbar({ collapsed, onToggleSidebar, onOpenDrawer, onOpenSearch,
         <Popover
           width="w-64"
           trigger={(p) => (
-            <button type="button" {...p} aria-label="Menú de perfil" className="flex items-center gap-2 rounded-xl p-1 hover:bg-slate-900/5">
-              <Avatar name={user?.name} size="sm" />
-              <span className="hidden max-w-32 truncate text-sm font-medium text-ink-2 xl:inline">{user?.name}</span>
+            <button type="button" {...p} aria-label="Menú de perfil" className="flex items-center gap-1.5 rounded-full p-1 pr-2 hover:bg-white/10">
+              <Avatar name={user?.name} size="md" className="ring-2 ring-white/25" />
+              <ChevronDown aria-hidden className="hidden size-4 text-ink-3 sm:block" />
             </button>
           )}
         >
@@ -141,7 +141,7 @@ function NotificationsList({ close }) {
       <ul className="max-h-80 space-y-0.5 overflow-y-auto scrollbar-thin">
         {data?.map((a) => (
           <li key={a.id}>
-            <Link to={`/pacientes/${a.patient?.id}`} onClick={close} className="flex items-start gap-2.5 rounded-lg px-2.5 py-2 hover:bg-slate-900/5">
+            <Link to={`/pacientes/${a.patient?.id}`} onClick={close} className="flex items-start gap-2.5 rounded-lg px-2.5 py-2 hover:bg-white/10">
               <StatusBadge kind="severity" status={a.severity} size="sm" className="mt-0.5" />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-medium text-ink">{fullName(a.patient)}</span>
@@ -152,7 +152,7 @@ function NotificationsList({ close }) {
           </li>
         ))}
       </ul>
-      <Link to="/seguimiento/alertas" onClick={close} className="mt-1 block rounded-lg px-2.5 py-2 text-center text-sm font-medium text-brand-700 hover:bg-brand-50">
+      <Link to="/seguimiento/alertas" onClick={close} className="mt-1 block rounded-lg px-2.5 py-2 text-center text-sm font-medium text-accent hover:bg-brand-50">
         Ver todas las alertas
       </Link>
     </div>

@@ -5,7 +5,7 @@ import { cn } from '../../lib/cn.js';
 
 const ToastContext = createContext(null);
 
-const ICONS = { success: [CheckCircle2, 'text-emerald-600'], error: [XCircle, 'text-red-600'], info: [Info, 'text-sky-600'] };
+const ICONS = { success: [CheckCircle2, 'text-emerald-300'], error: [XCircle, 'text-red-300'], info: [Info, 'text-sky-300'] };
 
 /**
  * Notificaciones efímeras (4 s). Admiten una acción (p. ej. "Deshacer").
@@ -53,7 +53,7 @@ export function ToastProvider({ children }) {
               <div
                 key={t.id}
                 role={t.tone === 'error' ? 'alert' : 'status'}
-                className="glass-strong pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border border-white/60 px-4 py-3 text-sm shadow-[var(--shadow-pop)] animate-slide-up"
+                className="glass-strong pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border border-white/15 px-4 py-3 text-sm shadow-[var(--shadow-pop)] animate-slide-up"
               >
                 <Icon aria-hidden className={cn('mt-0.5 size-4 shrink-0', color)} />
                 <div className="min-w-0 flex-1">
@@ -63,7 +63,7 @@ export function ToastProvider({ children }) {
                 {t.action && (
                   <button
                     type="button"
-                    className="shrink-0 font-semibold text-brand-700 hover:underline"
+                    className="shrink-0 font-semibold text-accent hover:underline"
                     onClick={() => {
                       t.action.onClick();
                       dismiss(t.id);

@@ -9,7 +9,7 @@ export function PageHeader({ title, description, actions, back, className, child
     <header className={cn('mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-end sm:justify-between', className)}>
       <div className="min-w-0">
         {back && (
-          <Link to={back.to} className="mb-1 inline-flex items-center gap-1 text-sm text-ink-3 hover:text-brand-700">
+          <Link to={back.to} className="mb-1 inline-flex items-center gap-1 text-sm text-ink-3 hover:text-accent">
             <ArrowLeft aria-hidden className="size-4" />
             {back.label}
           </Link>
@@ -23,7 +23,7 @@ export function PageHeader({ title, description, actions, back, className, child
   );
 }
 
-const AVATAR_TONES = ['bg-brand-100 text-brand-800', 'bg-amber-100 text-amber-800', 'bg-sky-100 text-sky-800', 'bg-violet-100 text-violet-800', 'bg-rose-100 text-rose-800', 'bg-emerald-100 text-emerald-800'];
+const AVATAR_TONES = ['bg-brand-100 text-accent', 'bg-amber-400/25 text-amber-200', 'bg-sky-400/25 text-sky-200', 'bg-violet-400/25 text-violet-200', 'bg-rose-400/25 text-rose-200', 'bg-emerald-400/25 text-emerald-200'];
 
 export function Avatar({ name, size = 'md', className }) {
   const tone = AVATAR_TONES[[...(name ?? '')].reduce((s, c) => s + c.charCodeAt(0), 0) % AVATAR_TONES.length];
@@ -46,7 +46,7 @@ export function ProgressBar({ value, tone = 'brand', label, className, size = 'm
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label={label}
-      className={cn('w-full overflow-hidden rounded-full bg-slate-200/80', size === 'sm' ? 'h-1.5' : 'h-2', className)}
+      className={cn('w-full overflow-hidden rounded-full bg-white/10', size === 'sm' ? 'h-1.5' : 'h-2', className)}
     >
       <div className={cn('h-full rounded-full transition-[width] duration-500', color)} style={{ width: `${pct}%` }} />
     </div>
@@ -69,8 +69,8 @@ export function Sparkline({ points, width = 84, height = 26, className }) {
   const last = points.length - 1;
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden className={cn('overflow-visible', className)}>
-      <path d={d} fill="none" stroke="var(--color-brand-600)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx={x(last)} cy={y(points[last])} r="3" fill="var(--color-brand-700)" stroke="white" strokeWidth="1.5" />
+      <path d={d} fill="none" stroke="#a9a7ff" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      <circle cx={x(last)} cy={y(points[last])} r="3" fill="#a9a7ff" stroke="#2b2766" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -80,18 +80,20 @@ export function Sparkline({ points, width = 84, height = 26, className }) {
  * explica el número (principio del dashboard).
  */
 export function StatCard({ label, value, sub, icon: Icon, to, tone = 'neutral', className }) {
-  const toneRing = { neutral: '', warning: 'ring-1 ring-amber-200', danger: 'ring-1 ring-red-200' }[tone];
+  const tile = { neutral: 'bg-brand-400/20 text-accent', warning: 'bg-amber-400/20 text-amber-300', danger: 'bg-red-400/20 text-red-300' }[tone];
   const content = (
     <>
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-xs font-medium text-ink-3">{label}</p>
-        {Icon && <Icon aria-hidden className={cn('size-4', tone === 'warning' ? 'text-amber-600' : tone === 'danger' ? 'text-red-600' : 'text-ink-3')} />}
-      </div>
-      <p className="mt-1.5 text-2xl font-semibold tracking-tight text-ink tabular">{value}</p>
+      {Icon && (
+        <span aria-hidden className={cn('mb-3 grid size-11 place-items-center rounded-xl', tile)}>
+          <Icon className="size-5" />
+        </span>
+      )}
+      <p className="text-2xl font-semibold tracking-tight text-ink tabular">{value}</p>
+      <p className="mt-0.5 text-sm font-medium text-ink-2">{label}</p>
       {sub && <p className="mt-0.5 text-xs text-ink-3">{sub}</p>}
     </>
   );
-  const classes = cn('card block p-4 transition-shadow', toneRing, to && 'hover:shadow-[var(--shadow-pop)] hover:border-slate-300', className);
+  const classes = cn('card block p-4 transition-all', to && 'hover:-translate-y-0.5 hover:bg-white/[0.11] hover:shadow-[var(--shadow-pop)]', className);
   return to ? (
     <Link to={to} className={classes}>
       {content}
@@ -113,13 +115,13 @@ export function NavTabs({ items, className, label }) {
           className={({ isActive }) =>
             cn(
               'inline-flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
-              isActive ? 'border-brand-700 text-brand-800' : 'border-transparent text-ink-3 hover:text-ink hover:border-slate-300',
+              isActive ? 'border-brand-700 text-accent' : 'border-transparent text-ink-3 hover:text-ink hover:border-white/20',
             )
           }
         >
           {it.icon && <it.icon aria-hidden className="size-4" />}
           {it.label}
-          {it.badge ? <span className="rounded-full bg-slate-200 px-1.5 text-[11px] tabular">{it.badge}</span> : null}
+          {it.badge ? <span className="rounded-full bg-white/15 px-1.5 text-[11px] tabular">{it.badge}</span> : null}
         </NavLink>
       ))}
     </nav>
@@ -151,12 +153,12 @@ export function Tabs({ value, onChange, items, label, className }) {
             onClick={() => onChange(it.value)}
             className={cn(
               '-mb-px inline-flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
-              active ? 'border-brand-700 text-brand-800' : 'border-transparent text-ink-3 hover:text-ink',
+              active ? 'border-brand-700 text-accent' : 'border-transparent text-ink-3 hover:text-ink',
             )}
           >
             {it.icon && <it.icon aria-hidden className="size-4" />}
             {it.label}
-            {it.badge ? <span className="rounded-full bg-slate-200 px-1.5 text-[11px] tabular">{it.badge}</span> : null}
+            {it.badge ? <span className="rounded-full bg-white/15 px-1.5 text-[11px] tabular">{it.badge}</span> : null}
           </button>
         );
       })}

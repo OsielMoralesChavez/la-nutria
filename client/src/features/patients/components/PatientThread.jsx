@@ -80,13 +80,13 @@ export function PatientThread({ summary }) {
                   'relative z-10 flex h-full flex-col rounded-xl border px-2.5 py-2 transition-all sm:px-3.5 sm:py-3',
                   isActive
                     ? 'border-brand-600 bg-brand-700 text-white shadow-[var(--shadow-pop)]'
-                    : 'border-line bg-white hover:border-brand-300 hover:shadow-[var(--shadow-card)]',
+                    : 'border-line bg-surface-2 hover:border-brand-300 hover:shadow-[var(--shadow-card)]',
                 )
               }
             >
               {({ isActive }) => (
                 <>
-                  <span className={cn('flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide sm:text-xs', isActive ? 'text-white/80' : 'text-brand-700')}>
+                  <span className={cn('flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide sm:text-xs', isActive ? 'text-white/80' : 'text-accent')}>
                     <s.icon aria-hidden className="size-3.5 shrink-0" />
                     <span className="truncate">
                       <span className="sm:hidden">{s.n}</span>

@@ -67,7 +67,7 @@ export function NextStep({ state, update, context, patient }) {
                     type="button"
                     aria-pressed={day === d}
                     onClick={() => setAppt({ day: d, start: null })}
-                    className={cn('rounded-lg border px-3 py-1.5 text-sm font-medium', day === d ? 'border-brand-600 bg-brand-50 text-brand-800' : 'border-line bg-white text-ink-2 hover:border-slate-300')}
+                    className={cn('rounded-lg border px-3 py-1.5 text-sm font-medium', day === d ? 'border-brand-600 bg-brand-50 text-accent' : 'border-line bg-surface-2 text-ink-2 hover:border-white/20')}
                   >
                     {s.label}
                   </button>
@@ -104,7 +104,7 @@ export function NextStep({ state, update, context, patient }) {
                         type="button"
                         aria-pressed={sel}
                         onClick={() => setAppt({ start: s.start, durationMin: duration })}
-                        className={cn('rounded-lg border px-2.5 py-1.5 text-sm tabular', sel ? 'border-brand-700 bg-brand-700 text-white' : 'border-line bg-white text-ink-2 hover:border-brand-400')}
+                        className={cn('rounded-lg border px-2.5 py-1.5 text-sm tabular', sel ? 'border-brand-700 bg-brand-700 text-white' : 'border-line bg-surface-2 text-ink-2 hover:border-brand-400')}
                       >
                         {fmtTimeOf(s.start)}
                       </button>
@@ -114,7 +114,7 @@ export function NextStep({ state, update, context, patient }) {
               </div>
             )}
             {n.appointment.start && (
-              <p className="flex items-center gap-1.5 text-sm font-medium text-brand-800">
+              <p className="flex items-center gap-1.5 text-sm font-medium text-accent">
                 <CalendarClock aria-hidden className="size-4" /> Se agendará: {fmtDateTime(n.appointment.start)}
               </p>
             )}

@@ -29,9 +29,9 @@ export function GoalCard({ goal, metric, patientId, compact }) {
   const lastCheckpoint = goal.checkpoints?.at(-1);
 
   return (
-    <article className={cn('rounded-xl border bg-white p-3.5', overdue ? 'border-amber-300' : 'border-line')}>
+    <article className={cn('rounded-xl border bg-surface-2 p-3.5', overdue ? 'border-amber-300/30' : 'border-line')}>
       <header className="flex items-start gap-2">
-        <Target aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-700" />
+        <Target aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
         <h3 className="min-w-0 flex-1 text-sm font-semibold text-ink">{goal.title}</h3>
         <StatusBadge kind="goal" status={goal.status} size="sm" />
         {can('goals:update') && !compact && (
@@ -69,7 +69,7 @@ export function GoalCard({ goal, metric, patientId, compact }) {
           <p className="mt-2 text-sm text-ink-2">
             Mantener {fmtNum(goal.target, decimals, unit)} ± {fmtNum(goal.tolerance ?? 0, decimals)} · actual{' '}
             <strong className="tabular">{fmtNum(goal.current, decimals, unit)}</strong>{' '}
-            <span className={p.withinTolerance ? 'text-emerald-700' : 'text-amber-700'}>({p.withinTolerance ? 'en rango' : 'fuera de rango'})</span>
+            <span className={p.withinTolerance ? 'text-emerald-300' : 'text-amber-300'}>({p.withinTolerance ? 'en rango' : 'fuera de rango'})</span>
           </p>
         ) : (
           <div className="mt-2.5">
@@ -96,13 +96,13 @@ export function GoalCard({ goal, metric, patientId, compact }) {
       )}
 
       {goal.dueDate && (
-        <p className={cn('mt-2 text-xs', overdue ? 'font-medium text-amber-800' : soon ? 'text-amber-700' : 'text-ink-3')}>
+        <p className={cn('mt-2 text-xs', overdue ? 'font-medium text-amber-200' : soon ? 'text-amber-300' : 'text-ink-3')}>
           {overdue ? `Venció el ${fmtDate(goal.dueDate)}` : `Fecha objetivo: ${fmtDate(goal.dueDate)}${soon ? ` · faltan ${due} días` : ''}`}
         </p>
       )}
 
       {p.reached && active && can('goals:update') && !compact && (
-        <div className="mt-2 flex items-center justify-between gap-2 rounded-lg bg-emerald-50 px-2.5 py-1.5 text-xs text-emerald-900">
+        <div className="mt-2 flex items-center justify-between gap-2 rounded-lg bg-emerald-400/15 px-2.5 py-1.5 text-xs text-emerald-200">
           La medición actual alcanza la meta.
           <Button size="sm" variant="ghost" onClick={() => setStatus('logrado')}>
             Marcar logrado

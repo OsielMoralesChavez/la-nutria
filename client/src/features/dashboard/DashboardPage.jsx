@@ -179,7 +179,7 @@ function TodayAgenda({ agenda }) {
             return (
               <li key={a.id} className={cn('flex items-center gap-3 px-2 py-2.5', !active && 'opacity-70')}>
                 <span className="w-12 shrink-0 text-sm font-semibold text-ink tabular">{fmtTimeOf(a.start)}</span>
-                <Link to={`/pacientes/${a.patient?.id}`} className="min-w-0 flex-1 truncate text-sm font-medium text-ink hover:text-brand-700">
+                <Link to={`/pacientes/${a.patient?.id}`} className="min-w-0 flex-1 truncate text-sm font-medium text-ink hover:text-accent">
                   {fullName(a.patient)}
                 </Link>
                 <StatusBadge kind="appointment" status={a.status} size="sm" className="max-sm:hidden" />
@@ -228,7 +228,7 @@ function Attention({ alerts, followUps }) {
         <ul className="divide-y divide-line/70">
           {items.map((it) => (
             <li key={it.id}>
-              <Link to={`/pacientes/${it.patient?.id}`} className="flex items-start gap-3 rounded-lg px-2 py-2.5 hover:bg-slate-900/[0.03]">
+              <Link to={`/pacientes/${it.patient?.id}`} className="flex items-start gap-3 rounded-lg px-2 py-2.5 hover:bg-white/[0.06]">
                 <StatusBadge kind="severity" status={it.severity} size="sm" className="mt-0.5" />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium text-ink">{fullName(it.patient)}</span>
@@ -268,7 +268,7 @@ function GoalsOverview({ chart }) {
           .map((s) => (
             <li key={s} className="grid grid-cols-[7.5rem_1fr_2.5rem] items-center gap-3 text-sm">
               <span className="text-ink-2">{GOAL_STATUS.labels[s]}</span>
-              <span className="h-2.5 overflow-hidden rounded-full bg-slate-100">
+              <span className="h-2.5 overflow-hidden rounded-full bg-white/10">
                 <span className={cn('block h-full rounded-full', s === 'logrado' ? 'bg-brand-700' : 'bg-brand-400')} style={{ width: `${(chart[s] / total) * 100}%` }} />
               </span>
               <span className="text-right font-semibold text-ink tabular">{chart[s]}</span>
@@ -292,7 +292,7 @@ function RecentActivity({ items }) {
               <span className="min-w-0 flex-1 text-ink-2">
                 <span className="font-medium text-ink">{a.actor}</span> {ACTIVITY_LABEL[a.action] ?? a.action}{' '}
                 {a.patient?.name ? (
-                  <Link to={`/pacientes/${a.patient.id}`} className="font-medium text-brand-700 hover:underline">
+                  <Link to={`/pacientes/${a.patient.id}`} className="font-medium text-accent hover:underline">
                     {a.patient.name}
                   </Link>
                 ) : (

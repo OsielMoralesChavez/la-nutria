@@ -39,11 +39,11 @@ export function PatientHeader({ patient }) {
   };
 
   return (
-    <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <header className="card flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
       <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-        <Avatar name={patient.fullName} size="xl" className="max-sm:size-12 max-sm:text-base" />
+        <Avatar name={patient.fullName} size="xl" className="size-16 text-xl ring-4 ring-white/20 sm:size-24 sm:text-3xl" />
         <div className="min-w-0">
-          <h1 className="truncate text-xl font-semibold tracking-tight text-ink sm:text-2xl">{patient.fullName}</h1>
+          <h1 className="truncate text-xl font-semibold tracking-tight text-ink sm:text-3xl">{patient.fullName}</h1>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-3">
             <span>
               {patient.age} años · {SEX.labels[patient.sex]}
@@ -57,11 +57,11 @@ export function PatientHeader({ patient }) {
             ))}
           </div>
           <div className="mt-1 flex flex-wrap gap-x-4 text-sm text-ink-3">
-            <a href={`tel:${patient.contact?.phone}`} className="inline-flex items-center gap-1 hover:text-brand-700">
+            <a href={`tel:${patient.contact?.phone}`} className="inline-flex items-center gap-1 hover:text-accent">
               <Phone aria-hidden className="size-3.5" /> {patient.contact?.phone}
             </a>
             {patient.contact?.email && (
-              <a href={`mailto:${patient.contact.email}`} className="inline-flex items-center gap-1 hover:text-brand-700 max-sm:hidden">
+              <a href={`mailto:${patient.contact.email}`} className="inline-flex items-center gap-1 hover:text-accent max-sm:hidden">
                 <Mail aria-hidden className="size-3.5" /> {patient.contact.email}
               </a>
             )}
@@ -76,7 +76,7 @@ export function PatientHeader({ patient }) {
           </Button>
         )}
         {!archived && can('appointments:create') && (
-          <Button variant="secondary" icon={CalendarPlus} to={`/agenda?nueva=1&paciente=${patient.id}`} className="max-sm:flex-1">
+          <Button variant="secondary" icon={CalendarPlus} to={`/agenda?nueva=1&paciente=${patient.id}`} className="rounded-full max-sm:flex-1">
             Agendar
           </Button>
         )}
