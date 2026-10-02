@@ -1,0 +1,20 @@
+# Dependencias y builds
+node_modules/
+dist/
+coverage/
+*.log
+
+# Variables de entorno: NUNCA se suben
+.env
+.env.*
+!.env.example
+
+# Archivos subidos por usuarios (fotos y documentos de pacientes)
+server/uploads/
+
+# Editor / SO
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

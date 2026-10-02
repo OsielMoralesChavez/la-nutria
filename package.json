@@ -1,0 +1,29 @@
+{
+  "name": "la-nutria",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sistema de gestión y seguimiento nutricional",
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:demo": "concurrently -n api,web -c green,cyan \"npm run dev:demo -w server\" \"npm run dev -w client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "seed": "npm run seed -w server",
+    "seed:demo": "npm run seed:demo -w server",
+    "test": "npm test -w shared && npm test -w server && npm test -w client",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
