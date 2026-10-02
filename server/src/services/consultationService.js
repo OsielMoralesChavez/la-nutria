@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { hasPermission } from '../middleware/authorize.js';
 import { Appointment, Consultation, Patient } from '../models/index.js';
 import { ApiError } from '../utils/ApiError.js';
+import { addDays, startOfDay } from '../utils/query.js';
 import { record } from './auditService.js';
 import { reconcilePatient } from './alertService.js';
 import * as clinical from './clinicalRecordService.js';
@@ -32,7 +33,8 @@ export async function listByPatient(patientId, { page, limit, status }) {
  * paciente, lo devuelve en lugar de crear otro (evita duplicados por doble clic
  * o por volver a entrar).
  */
-export async function start(patientId, { appointment: appointmentId, type, reason }, actor, req) {
+export async function start(patientId, { appointment, type, reason }, actor, req) {
+  let appointmentId = appointment;
   await findOrThrow(patientId);
 
   const existing = await Consultation.findOne({ patient: patientId, nutritionist: actor.id, status: 'borrador' });
@@ -42,6 +44,18 @@ export async function start(patientId, { appointment: appointmentId, type, reaso
     const appt = await Appointment.findOne({ _id: appointmentId, patient: patientId });
     if (!appt) throw ApiError.notFound('Cita');
     if (!['programada', 'confirmada'].includes(appt.status)) throw ApiError.conflict('La cita no está activa');
+  } else {
+    // Si el paciente tiene cita hoy con este nutriólogo, se vincula sola
+    // (la consulta puede iniciarse desde la ficha, no sólo desde la agenda).
+    const today = startOfDay();
+    const todays = await Appointment.findOne({
+      patient: patientId,
+      nutritionist: actor.id,
+      status: { $in: ['programada', 'confirmada'] },
+      start: { $gte: today, $lt: addDays(today, 1) },
+      consultation: null,
+    }).sort({ start: 1 });
+    appointmentId = todays?.id;
   }
 
   const closedCount = await Consultation.countDocuments({ patient: patientId, status: 'cerrada' });

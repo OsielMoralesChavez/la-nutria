@@ -21,6 +21,7 @@ const fmtDateTime = (d) =>
     month: 'short',
     hour: '2-digit',
     minute: '2-digit',
+    hour12: false,
     timeZone: process.env.TZ || 'America/Mexico_City',
   });
 const fullName = (p) => (p ? `${p.firstName} ${p.lastName}` : 'Paciente');

@@ -1,6 +1,6 @@
 # Fase 2 — Análisis de requisitos
 
-> Estado: **propuesta en validación**. Los puntos marcados como **[SUPUESTO]** son decisiones por defecto tomadas por el arquitecto (el Bloque 2 del levantamiento se delegó a esta fase). Se pueden cambiar sin rehacer la arquitectura.
+> Estado: **aprobado**. Los puntos marcados como **[SUPUESTO]** son decisiones por defecto tomadas por el arquitecto (el Bloque 2 del levantamiento se delegó a esta fase). Se pueden cambiar sin rehacer la arquitectura.
 > Los puntos **[PENDIENTE]** requieren confirmación del nutriólogo antes de implementar el módulo correspondiente.
 
 ## 1. Contexto confirmado

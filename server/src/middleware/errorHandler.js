@@ -30,7 +30,6 @@ function normalize(err) {
  * Manejador central. Al cliente sólo llega: código, mensaje apto para usuario,
  * detalles de validación y requestId. Stack y mensaje interno van al log.
  */
-// eslint-disable-next-line no-unused-vars
 export function errorHandler(err, req, res, _next) {
   const apiErr = normalize(err);
   const status = apiErr?.status ?? 500;

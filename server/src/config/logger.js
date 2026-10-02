@@ -24,7 +24,7 @@ const REDACT_PATHS = [
 
 const transport =
   !env.isProd && !env.isTest
-    ? { target: 'pino-pretty', options: { colorize: true, translateTime: 'HH:MM:ss', ignore: 'pid,hostname' } }
+    ? { target: 'pino-pretty', options: { colorize: true, translateTime: 'SYS:HH:MM:ss', ignore: 'pid,hostname' } }
     : undefined;
 
 export const logger = pino({

@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
-import { AuditLog } from '../src/models/index.js';
+import { AuditLog, RefreshSession } from '../src/models/index.js';
 import { createUser, loginAs, PASSWORD, useTestDb } from './helpers.js';
 
 const ctx = useTestDb();
@@ -54,7 +54,13 @@ describe('autenticación', () => {
     const second = cookieValue(r1.headers['set-cookie']);
     expect(second).not.toBe(first);
 
-    // Reusar el token viejo revoca toda la sesión…
+    // Dentro de la ventana de gracia (pestañas simultáneas) no se revoca.
+    const concurrent = await request(ctx.app).post('/api/v1/auth/refresh').set('Cookie', first);
+    expect(concurrent.status).toBe(200);
+    expect(concurrent.headers['set-cookie']).toBeUndefined();
+
+    // Pasada la ventana, reusar el token viejo revoca toda la sesión…
+    await RefreshSession.updateMany({}, { lastUsedAt: new Date(Date.now() - 60_000) });
     const reuse = await request(ctx.app).post('/api/v1/auth/refresh').set('Cookie', first);
     expect(reuse.status).toBe(401);
     // …incluido el token vigente.

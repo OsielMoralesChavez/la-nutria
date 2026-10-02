@@ -55,10 +55,15 @@ export async function list({ q, status, role, page, limit }) {
   };
 }
 
-/** Lista corta para selectores (responsable, agenda). */
+/**
+ * Lista corta para selectores (responsable, agenda): sólo usuarios activos
+ * cuyo rol puede atender consultas (excluye cuentas puramente administrativas).
+ */
 export async function listNutritionists() {
-  const users = await User.find({ status: 'activo' }).select('name role').populate('role', 'key name').sort({ name: 1 });
-  return users.map((u) => ({ id: u.id, name: u.name, role: u.role?.name }));
+  const users = await User.find({ status: 'activo' }).select('name role').populate('role', 'key name permissions').sort({ name: 1 });
+  return users
+    .filter((u) => u.role?.permissions?.includes('consultations:create') && u.role.key !== ROLE_KEYS.SUPERUSER)
+    .map((u) => ({ id: u.id, name: u.name, role: u.role.name }));
 }
 
 export async function get(id) {

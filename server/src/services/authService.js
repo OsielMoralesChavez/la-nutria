@@ -119,7 +119,17 @@ export async function refresh(refreshToken, req) {
 
   const session = await RefreshSession.findOne({ tokenHash: hash });
   if (!session) {
-    const reused = await RefreshSession.findOne({ previousHashes: hash, revokedAt: null });
+    const reused = await RefreshSession.findOne({ previousHashes: hash, revokedAt: null }).select('+previousHashes');
+    // Ventana de gracia: dos pestañas que renuevan a la vez envían el mismo
+    // token. Si es el inmediatamente anterior y la rotación fue hace < 30 s,
+    // se entrega un access token sin rotar (la cookie nueva ya está en el navegador).
+    const GRACE_MS = 30_000;
+    if (reused && reused.previousHashes.at(-1) === hash && reused.lastUsedAt > new Date(Date.now() - GRACE_MS)) {
+      const user = await User.findById(reused.user).populate('role');
+      if (user?.status === 'activo') {
+        return { accessToken: signAccessToken(user), refreshToken: null, user: toSessionUser(user, user.role) };
+      }
+    }
     if (reused) {
       reused.revokedAt = new Date();
       reused.revokedReason = 'reuse_detected';

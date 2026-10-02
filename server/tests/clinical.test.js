@@ -224,3 +224,15 @@ describe('dashboard', () => {
     expect(res.body.data.activity[0]).toMatchObject({ action: 'patients.create', patient: { name: 'Laura Pérez' } });
   });
 });
+
+describe('vinculación automática con la cita del día', () => {
+  it('iniciar consulta desde la ficha usa la cita de hoy', async () => {
+    const s = await loginAs(ctx.app, 'usuario');
+    const p = (await s.post('/api/v1/patients').send(newPatient())).body.data;
+    const start = new Date(Date.now() + 60_000);
+    if (start.getDate() !== new Date().getDate()) return; // casi medianoche: no aplica
+    const appt = (await s.post('/api/v1/appointments').send({ patient: p.id, start })).body.data;
+    const c = (await s.post(`/api/v1/patients/${p.id}/consultations`).send({})).body.data;
+    expect(c.appointment).toBe(appt.id);
+  });
+});

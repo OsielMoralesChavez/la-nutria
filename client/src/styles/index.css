@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+/*
+ * Sistema visual de La Nutria.
+ * - Primario: verde azulado ("nutria") para acciones, foco y estado activo.
+ * - Acento ámbar sólo para avisos; rojo sólo para errores/destructivo.
+ * - Glass moderado: utilidades .glass / .glass-strong en topbar, sidebar,
+ *   modales, paneles y la tarjeta destacada. El contenido de lectura va en
+ *   superficies sólidas (.card).
+ */
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-300: #5eead4;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+
+  --color-ink: #0f172a;
+  --color-ink-2: #334155;
+  --color-ink-3: #64748b;
+  --color-line: #e2e8f0;
+  --color-canvas: #f6f8f8;
+
+  --radius-card: 0.875rem;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-pop: 0 10px 30px -8px rgb(15 23 42 / 0.18), 0 4px 10px -4px rgb(15 23 42 / 0.08);
+
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-slide-up: slide-up 180ms ease-out;
+  --animate-slide-in-right: slide-in-right 200ms ease-out;
+  --animate-pulse-ring: pulse-ring 1.6s ease-out 2;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgb(13 148 136 / 0.35); }
+    100% { box-shadow: 0 0 0 10px rgb(13 148 136 / 0); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    /* Fondo sutil para que el glass tenga contra qué difuminar. */
+    background-image:
+      radial-gradient(60rem 40rem at 110% -10%, rgb(20 184 166 / 0.10), transparent 60%),
+      radial-gradient(50rem 35rem at -10% 110%, rgb(251 191 36 / 0.07), transparent 60%);
+    background-attachment: fixed;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-[var(--radius-card)] border border-line bg-white shadow-[var(--shadow-card)];
+  }
+  .glass {
+    background-color: rgb(255 255 255 / 0.72);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border-color: rgb(255 255 255 / 0.6);
+  }
+  .glass-strong {
+    background-color: rgb(255 255 255 / 0.86);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+  }
+  .glass-brand {
+    background-image: linear-gradient(135deg, rgb(15 118 110 / 0.92), rgb(13 148 136 / 0.85));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.5) transparent;
+  }
+}
+
+/* Sin soporte de blur, o si el usuario pide menos transparencia: superficies sólidas. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-strong {
+    background-color: rgb(255 255 255 / 0.97);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-strong {
+    background-color: #fff;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

@@ -16,9 +16,11 @@ export async function login(req, res) {
 }
 
 export async function refresh(req, res) {
+  // Sin cookie simplemente no hay sesión (p. ej. al abrir la app): no es un error.
+  if (!req.cookies?.[REFRESH_COOKIE]) return noContent(res);
   try {
     const { accessToken, refreshToken, user } = await authService.refresh(req.cookies?.[REFRESH_COOKIE], req);
-    setRefreshCookie(res, refreshToken);
+    if (refreshToken) setRefreshCookie(res, refreshToken);
     ok(res, { accessToken, user });
   } catch (err) {
     clearRefreshCookie(res);
